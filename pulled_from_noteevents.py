@@ -41,7 +41,6 @@ def prepare_balanced_data():
                 # Use your 20-128 word limit
                 if 20 <= len(words) <= 128:
                     s_lower = s.lower()
-                    
                     # For LABEL 1: Only keep it if it looks like a real clinical statement
                     if label == 1:
                         if any(kw in s_lower for kw in medical_keywords):
