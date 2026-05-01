@@ -1,78 +1,107 @@
 import pandas as pd
-import nltk
 import os
+import nltk
 import random
 from nltk.tokenize import sent_tokenize
 
-# --- 1. Initial Setup & NLTK Downloads ---
-try:
-    nltk.download('punkt')
-    nltk.download('punkt_tab')
-except:
-    pass
+nltk.download('punkt')
 
 path = r'C:\Users\siyab\OneDrive\Desktop\CSCE421\final'
+# important label1 keywords 
+label_1_keywords = [
+    "diagnosis", "diagnosed", "history of", "hx of",
+    "acute", "chronic", "disease", "failure",
+    "infection", "pneumonia", "sepsis",
+    "diabetes", "hypertension", "cancer",
+    "fracture", "cardiac", "respiratory",
+    "stroke", "anemia", "pain", "bleeding",
+    "treated", "admitted", "procedure",
+    "surgery", "medication", "antibiotic"
+]
+#important label0 keywords
+label_0_keywords = [
+    "please call", "follow up", "follow-up",
+    "family updated", "appointment",
+    "insurance", "social work",
+    "discharge instructions", "thank you",
+    "signed", "dictated by",
+    "no issues", "stable condition"
+]
 
-def prepare_balanced_data():
-    # Load your local MIMIC CSVs
-    print("Loading local CSV files... (This may take a minute)")
+def build_dataset():
+
     notes = pd.read_csv(os.path.join(path, 'NOTEEVENTS.csv'))
     diagnoses = pd.read_csv(os.path.join(path, 'DIAGNOSES_ICD.csv'))
+    # makes sure hadm_ids are unique and drop the rows with no hadm_id
+    icd_hadm_ids = set(diagnoses['HADM_ID'].dropna().unique())
+    #seperate notes with an icd anf notes without an icd code 
+    notes_with_icd = notes[notes['HADM_ID'].isin(icd_hadm_ids)]
+    notes_without_icd = notes[~notes['HADM_ID'].isin(icd_hadm_ids)]
 
-    # Identify admissions that have ICD codes
-    useful_hadms = diagnoses['HADM_ID'].unique()
-    
-    # Take the top 2500 notes for each category to extract sentences from
-# Shuffling and assigning in one go
-    pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(frac=1, random_state=42)
-    neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(frac=1, random_state=42)
-    def get_valid_sentences(df_subset, label):
-        valid = []
-        # Keywords that suggest a sentence is valuable for ICD coding
-        medical_keywords = ['history', 'diagnosis', 'acute', 'chronic', 'syndrome', 'pain', 'failure', 'patient']
-        
-        for text in df_subset['TEXT'].dropna():
-            # Basic cleanup: remove newlines so sentence splitting is more accurate
-            clean_text = str(text).replace('\n', ' ')
-            sentences = sent_tokenize(clean_text)
-            
-            for s in sentences:
-                words = s.split()
-                # Use your 20-128 word limit
-                if 20 <= len(words) <= 128:
-                    s_lower = s.lower()
-                    
-                    # For LABEL 1: Only keep it if it looks like a real clinical statement
-                    if label == 1:
-                        if any(kw in s_lower for kw in medical_keywords):
-                            valid.append({'text': s.strip(), 'label': label})
-                    
-                    # For LABEL 0: Just keep it (Nursing/Social work text is naturally less codable)
-                    else:
-                        valid.append({'text': s.strip(), 'label': label})
-        return valid
+    # drop notes that have an empty text
+    notes_with_icd = notes_with_icd.dropna(subset=['TEXT'])
+    notes_without_icd = notes_without_icd.dropna(subset=['TEXT'])
 
-    print("Extracting meaningful sentences...")
-    pos_data = get_valid_sentences(pos_notes, 1)
-    neg_data = get_valid_sentences(neg_notes, 0)
+    # Sample 100 each
+    sample_with_icd = notes_with_icd.sample(100, random_state=42)
+    sample_without_icd = notes_without_icd.sample(100, random_state=42)
 
-    # --- 4. Balance the Labels ---
-    # Find out which list is smaller and match the other one to it
-    target_size = min(len(pos_data), len(neg_data))
-    print(f"Balancing dataset to {target_size} rows per label...")
-    
-    final_data = pos_data[:target_size] + neg_data[:target_size]
-    
-    # Shuffle the final list so labels 0 and 1 are mixed
-    train_df = pd.DataFrame(final_data).sample(frac=1).reset_index(drop=True)
-    
-    # Save the file
-    output_file = os.path.join(path, 'balanced_sbert_train.csv')
-    train_df.to_csv(output_file, index=False)
-    
-    print(f"SUCCESS!")
-    print(f"Saved {len(train_df)} rows to: {output_file}")
-    print(f"Label Counts:\n{train_df['label'].value_counts()}")
+    combined_notes = pd.concat([sample_with_icd, sample_without_icd])
+
+
+    label1 = []
+    label0 = []
+    #look at the text column
+    for text in combined_notes['TEXT']:
+        clean = str(text).replace('\n', ' ')
+        #split notes into sentences and sentences into words 
+        for s in sent_tokenize(clean):
+            words = s.split()
+            # makes sure the length of each sentence is longer than 20 words and no longer than 128 
+            if 20 <= len(words) <= 128:
+                s_lower = s.lower()
+                
+                has_label1 = any(k in s_lower for k in label_1_keywords)
+                has_label0 = any(k in s_lower for k in label_0_keywords)
+                # makes sure any label1 sentences not have a word in label0
+                # if true add it to label1
+                if has_label1 and not has_label0:
+                    label1.append(s.strip())
+
+                elif not has_label1:
+                    label0.append(s.strip())
+
+    print(f"Label1 candidates: {len(label1)}")
+    print(f"Label0 candidates: {len(label0)}")
+
+    # Shuffle
+    random.shuffle(label1)
+    random.shuffle(label0)
+
+    # Balance
+    target = min(len(label1), len(label0))
+
+    label1 = label1[:target]
+    label0 = label0[:target]
+
+    data = []
+
+    for s in label1:
+        data.append({"text": s, "label": 1})
+
+    for s in label0:
+        data.append({"text": s, "label": 0})
+
+    df = pd.DataFrame(data).sample(frac=1).reset_index(drop=True)
+
+    print("Final distribution:")
+    print(df['label'].value_counts())
+    print(f"Total rows: {len(df)}")
+
+    output_file = os.path.join(path, 'final_sentence_dataset.csv')
+    df.to_csv(output_file, index=False)
+
+    print("Saved dataset!")
 
 if __name__ == "__main__":
-    prepare_balanced_data()
+    build_dataset()
