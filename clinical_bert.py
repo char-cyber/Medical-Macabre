@@ -38,6 +38,8 @@ from transformers import (
     Trainer
 )
 
+print("Starting training...")
+
 # LOAD DATA -----------------------------------------------------------------------------------------
 df = pd.read_csv("balanced_sbert_train.csv")
 df = df.dropna(subset=["text", "label"])
