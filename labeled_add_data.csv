@@ -1,0 +1,355 @@
+,text,label
+0,24 Hour Events,1
+1,[**1-14**] Events,1
+2,"off airbrone precautions, AFBx3 negative stopped antibiotics since RSV pna continuing Lasix 40mg IV BID started metoprolol 12.5 mg PO BID for afib with RVR in addition to dilt 90mg PO QID giving tramadol with dilaudid at 8pm, spiked to 101 and was pan-cultured BLOOD CULTURED",1
+3,[**2129-1-14**] 08,1
+4,00 PM Sulfa (Sulfonamide Antibiotics) Unknown; Last dose of Antibiotics,0
+5,Ceftriaxone,1
+7,30 AM Infusions,1
+8,Other ICU Pantoprazole (Protonix),1
+10,33 PM Other Changes to medical and Review of systems is unchanged from admission except as noted below Review of systems,1
+11,Flowsheet Data as of [**2129-1-15**] 06,1
+12,42 AM Vital signs Hemodynamic monitoring Fluid balance 24 hours Since 12 AM Tmax,1
+13,38.6 C (101.4 Tcurrent,1
+14,37.1 C (98.8 HR,1
+15,69 (69,1
+16,33) insp/min SpO2,1
+17,96% Heart rhythm,1
+18,SR (Sinus Rhythm) Total In,1
+19,840 mL 87 mL PO,1
+20,240 mL TF,1
+21,IVF,1
+22,600 mL 87 mL Blood products,1
+23,Total out,1
+24,"2,470 mL 400 mL Urine",1
+25,"2,470 mL 400 mL NG",1
+26,Stool,1
+27,Drains,1
+28,Balance,1
+29,"-1,630 mL -313 mL Respiratory support O2 Delivery Device",1
+30,High flow neb SpO2,1
+31,96% ABG,1
+32,///32/ ination General Appearance,1
+33,"Well nourished, No acute distress, No(t) Anxious Eyes / Conjunctiva",0
+34,"PERRL, MMM and OP clear Head, Ears, Nose, Throat",1
+35,Normocephalic Lymphatic,0
+36,Cervical WNL Cardiovascular,1
+37,(S1,1
+38,"Normal), (S2",0
+39,"Normal), (Murmur",0
+40,"No(t) Systolic, No(t) Diastolic), tachy and irregular Peripheral Vascular",0
+41,(Right radial pulse,1
+42,"Present), (Left radial pulse",1
+43,"Present), (Right DP pulse",1
+44,"Present), (Left DP pulse",1
+45,Present) Respiratory / Chest,1
+46,(Expansion,1
+47,"Symmetric), (Percussion",1
+48,Resonant,1
+49,"), (Breath Sounds",1
+50,Clear,1
+51,", Crackles",1
+52,"bibasilar coarse crackles, decreased amount of wheezes) Skin",1
+53,no rash Neurologic,0
+54,Responds to,1
+55,"Not assessed, Movement",0
+56,"spontaneous, purposeful, Tone",1
+57,Not assessed.,0
+58,Labs / Radiology 189 K/uL 9.4 g/dL 110 mg/dL 0.6 mg/dL 32 mEq/L 3.5 mEq/L 12 mg/dL 91 mEq/L 130 mEq/L 27.9 % 9.4 K/uL [image002.jpg] [**2129-1-10**] 11,1
+59,27 PM [**2129-1-11**] 03,1
+60,46 AM [**2129-1-11**] 11,1
+61,13 AM [**2129-1-12**] 03,1
+62,05 AM [**2129-1-13**] 02,1
+63,53 AM [**2129-1-13**] 02,1
+64,19 PM [**2129-1-13**] 09,1
+65,00 PM [**2129-1-14**] 03,1
+66,30 AM [**2129-1-14**] 06,1
+67,40 AM [**2129-1-15**] 04,1
+68,22 AM WBC 7.5 7.7 6.5 7.9 8.4 9.4 Hct 27.1 28.8 29.5 29.2 28.5 27.9 Plt 190 201 194 [**Telephone/Fax (3) 4907**] Cr 0.6 0.6 0.7 0.7 0.7 0.6 0.6 0.7 0.6 TropT <0.01 <0.01 Glucose 194 197 121 124 142 133 133 119 110 Other labs,1
+69,PT / PTT / INR,1
+70,"17.0/31.8/1.5, CK / CKMB / Troponin-T",1
+71,"265/5/<0.01, ALT / AST",1
+72,"15/46, Alk Phos / T Bili",1
+73,"90/0.7, Amylase / Lipase",1
+74,"20/11, Differential-Neuts",1
+75,"80.1 %, Band",1
+76,"0.0 %, Lymph",1
+77,"11.6 %, Mono",0
+78,"6.9 %, Eos",1
+79,"1.1 %, Lactic Acid",1
+80,"2.1 mmol/L, Albumin",1
+81,"2.9 g/dL, LDH",1
+82,"186 IU/L, Ca++",1
+83,"7.7 mg/dL, Mg++",1
+84,"1.7 mg/dL, PO4",1
+85,"2.7 mg/dL Assessment and Plan 72 y/o gentleman with CHF Afib with RVR with hypoxia from RSV PNA, idiopathic pulmonary fibrosis, and pulmonary edema off Abx on Lasix.",1
+86,# Dispo,1
+87,ICU for now pending improvement of resp status ICU Care Nutrition,0
+88,Glycemic Control,1
+89,Lines,1
+90,PICC Line,1
+91,[**2129-1-9**] 12,1
+92,00 PM Prophylaxis,1
+93,DVT,1
+94,Stress ulcer,1
+95,VAP,1
+96,Comments,1
+97,Communication,1
+99,Code status,1
+100,Disposition,1
+101,Demographics Day of intubation,1
+102,Day of mechanical ventilation,1
+103,14 Ideal body weight,1
+104,64.4 None Ideal tidal volume,0
+105,257.6 / 386.4 / 515.2 mL/kg Airway Airway Placement Data Known difficult intubation,1
+106,Unknown Procedure location,0
+107,Reason,1
+108,Tube Type ETT,1
+109,Position,1
+110,21 cm at teeth Route,1
+111,Oral Type,1
+112,Standard Size,1
+113,7.5mm Cuff Management,1
+114,Vol/Press,1
+115,Cuff pressure,1
+116,23 cmH2O Cuff volume,1
+117,7 mL / Airway problems,1
+119,Lung sounds RLL Lung Sounds,1
+120,Diminished RUL Lung Sounds,1
+121,Diminished LUL Lung Sounds,1
+122,Diminished LLL Lung Sounds,1
+123,Diminished Comments,1
+124,Secretions Sputum color / consistency,1
+125,White / Thick Sputum source/amount,1
+126,Suctioned / Small Comments,1
+127,Ventilation Assessment Level of breathing assistance,1
+128,Continuous invasive ventilation Visual assessment of breathing pattern,1
+129,Normal quiet breathing Assessment of breathing comfort,0
+130,No response (sleeping / sedated) Non-invasive ventilation assessment,0
+131,Invasive ventilation assessment,1
+132,Trigger work assessment,1
+133,Triggering synchronously Dysynchrony assessment,0
+135,Plan Next 24-48 hours,1
+136,Continue with daily RSBI tests & SBT's as tolerated Reason for continuing current ventilatory support,1
+137,Cannot protect airway Respiratory Care Shift Procedures Transports,1
+138,Destination (R/T) Time Complications Comments Bedside Procedures,1
+140,RSBI done on 0 peep/ 5 ips 103.,1
+141,CVICU HPI,1
+142,HD2 Ejection Fraction,1
+143,30% Hemoglobin A1c,1
+144,6.0 Pre-Op Weight,1
+145,178.57 lbs 81 kgs Baseline Creatinine,1
+146,0.8 PMHx,1
+147,"CAD, s/p multiple coronary stents, s/p CEA, HTN, ^lipids, prostate ca treated with XRT, COPD, chronic bronchitis, chronic pain, s/p L hernia repair, h/o radiation colitis, LBP [**Last Name (un) **]",1
+148,"ASA 325', Simvistatin 80', Lopressor 12.5"", Cozaar 50', Allopurinol 100', Spiriva"", Vicodin 1"" Assessment",0
+149,87M with 90% LM disease.,1
+150,At [**2160-9-8**] 09,1
+151,00 PM Atenolol Shortness of br Last dose of Antibiotics,0
+152,Ampicillin/Sulbactam (Unasyn),1
+153,[**2160-9-9**] 04,1
+155,Heparin Sodium,1
+156,1.75 mcg/Kg/min Other ICU Other Flowsheet Data as of [**2160-9-9**] 08,1
+157,32 AM Vital signs Hemodynamic monitoring Fluid balance 24 hours Since [**62**] a.m. Tmax,1
+158,36.6 C (97.8 T current,1
+159,36.3 C (97.4 HR,1
+160,87 (52,1
+161,22) insp/min SPO2,1
+162,94% Heart rhythm,1
+163,SR (Sinus Rhythm) Height,1
+164,70 Inch Total In,1
+165,425 mL 359 mL PO,1
+166,240 mL Tube feeding,1
+167,IV Fluid,1
+168,185 mL 359 mL Blood products,1
+170,530 mL 400 mL Urine,1
+171,530 mL 400 mL NG,1
+175,-105 mL -41 mL Respiratory support O2 Delivery Device,1
+176,Nasal cannula SPO2,1
+177,94% ABG,1
+178,///28/ ination General Appearance,1
+179,No acute distress HEENT,0
+180,PERRL Cardiovascular,1
+181,(Rhythm,1
+182,Regular) Respiratory / Chest,1
+184,"Symmetric), (Breath Sounds",1
+185,Clear bilaterally) Abdominal,1
+186,"Soft, Non-tender, Bowel sounds present Left Extremities",1
+187,(Edema,1
+188,"none ), (Temperature",0
+189,"Warm), (Pulse",1
+190,Dorsalis pedis,1
+191,Present) Right Extremities,1
+193,"none), (Temperature",0
+196,Present) Left thigh with erythema warm decreasing in area Neurologic,1
+197,(Awake / Alert / Oriented,1
+198,"x 3), Follows simple commands, (Responds to",1
+199,"Verbal stimuli), Moves all extremities Labs / Radiology 227 K/uL 11.8 g/dL 126 mg/dL 0.8 mg/dL 28 mEq/L 3.9 mEq/L 21 mg/dL 105 mEq/L 139 mEq/L 36.4 % 9.1 K/uL [image002.jpg] [**2160-9-8**] 08",1
+200,37 PM [**2160-9-9**] 05,1
+201,31 AM WBC 9.0 9.1 Hct 40.6 36.4 Plt 243 227 Creatinine 0.8 0.8 Troponin T 0.45 Glucose 143 126 Other labs,1
+203,"12.2/86.7/1.0, CK / CK-MB / Troponin T",1
+204,"302/40/0.45, ALT / AST",1
+205,"18/46, Alk-Phos / T bili",1
+206,"77/0.5, Differential-Neuts",1
+207,"71.7 %, Lymph",1
+208,"23.1 %, Mono",0
+209,"4.1 %, Eos",1
+210,"0.9 %, Albumin",1
+211,"3.5 g/dL, Ca",1
+212,"8.2 mg/dL, Mg",1
+213,"2.1 mg/dL, PO4",1
+214,2.5 mg/dL Assessment and Plan .H/O CHEST PAIN Assessment and Plan,1
+215,Neurologic,1
+216,Neuro checks Q,1
+217,"4 hr, denies pain Cardiovascular",1
+218,"Aspirin, Beta-blocker, Statins, On heparin and nitroglycerin drip, bradycardia Pulmonary",1
+219,"IS, cough and deep breath, PFT today to evaluate pulmonary function and room air ABG Gastrointestinal / Abdomen",1
+220,bowel regimen Nutrition,1
+221,Regular diet Renal,1
+222,"Foley, Adequate UO Hematology",1
+223,stable hct Endocrine,1
+224,"sliding scale for goal BG < 150, [**Last Name (un) 303**] following Infectious Disease",1
+225,Unasyn for left leg cellulitis Lines / Tubes / Drains,1
+226,"Foley with hematuria, irrigated no clots will continue to monitor Wounds",0
+227,Dry dressings ICU Care Nutrition,1
+229,Regular insulin sliding scale Lines,1
+230,20 Gauge,1
+231,[**2160-9-8**] 06,1
+234,(Systemic anticoagulation,1
+235,Heparin drip) Stress ulcer,1
+236,Not indicated VAP bundle,0
+239,"Patient discussed on interdisciplinary rounds , ICU Code status",1
+240,Full code Disposition,1
+241,ICU,1
+242,Anxiety Assessment,1
+243,Action,1
+244,Response,1
+245,Plan,1
+246,"Pain control (acute pain, chronic pain) Assessment",1
+250,Pericardial effusion with tamponade Assessment,1
+254,"Pleural effusion, acute Assessment",1
+259,11 Day of mechanical ventilation,1
+260,11 Ideal body weight,1
+261,75.3 None Ideal tidal volume,0
+262,301.2 / 451.8 / 602.4 mL/kg Airway Airway Placement Data Known difficult intubation,1
+263,No Procedure location,1
+264,ICU Reason,1
+265,Emergent (1st time) Tube Type ETT,1
+267,23 cm at teeth Route,1
+273,25 cmH2O Cuff volume,1
+274,8 mL / Air Lung sounds RLL Lung Sounds,1
+278,Diminished Secretions Sputum color / consistency,1
+279,Blood Tinged / Thick Sputum source/amount,1
+280,Suctioned / Small Ventilation Assessment Level of breathing assistance,1
+281,Intermittent invasive ventilation Visual assessment of breathing pattern,1
+282,"Accessory muscle use, Intercostal retractions Assessment of breathing comfort",1
+283,No response (sleeping / sedated) Invasive ventilation assessment,1
+285,Abnormal trigger efforts (efforts during inspiratory) Dysynchrony assessment,0
+286,"Vigorous inspiratory efforts, Possible air trapping, Frequent alarms (High rate, High min.",1
+287,ventilation) Plan Next 24-48 hours,1
+288,Reduce PEEP as tolerated Reason for continuing current ventilatory support,1
+289,Underlying illness not resolved,0
+290,PATIENT/TEST INFORMATION,1
+291,Indication,1
+292,Left ventricular function.,1
+293,Height,1
+294,(in) 72 Weight (lb),1
+295,212 BSA (m2),1
+296,2.19 m2 BP (mm Hg),1
+297,167/74 HR (bpm),1
+298,92 Status,1
+299,Inpatient Date/Time,1
+300,[**2196-12-6**] at 14,1
+301,10 Test,1
+302,Portable TTE (Complete) Doppler,1
+303,Complete pulse and color flow Contrast,1
+304,None Technical Quality,0
+305,Adequate,1
+306,LV WALL MOTION,1
+307,The following resting regional left ventricular wall motion abnormalities are seen,1
+308,mid anterior,1
+309,TITLE,0
+311,NASAL SWAB,0
+312,Cr improved 1.6 to 1.5 Penicillins Unknown; Plavix (Oral) (Clopidogrel Bisulfate) Unknown; Last dose of Antibiotics,0
+313,Infusions,0
+314,Other ICU Other Changes to medical and Review of systems is unchanged from admission except as noted below Review of systems,0
+315,Flowsheet Data as of [**2115-11-2**] 07,0
+316,57 AM Vital signs Hemodynamic monitoring Fluid balance 24 hours Since 12 AM Tmax,1
+317,35.5 C (95.9 Tcurrent,0
+318,35.5 C (95.9 HR,0
+319,69 (60,0
+320,16) insp/min SpO2,1
+321,93% Heart rhythm,0
+323,173 mL PO,0
+324,TF,0
+326,173 mL Blood products,1
+328,0 mL 0 mL Urine,0
+329,NG,0
+333,0 mL 173 mL Respiratory support O2 Delivery Device,1
+334,Nasal cannula SpO2,0
+335,93% ABG,0
+336,///25/ ination GEN,0
+337,"nad, conversational, without pain, without lightheadedness or sob.",0
+338,Cv,0
+339,"rrr, no m/r/g Pulm",0
+340,ctab Abd,0
+341,"soft, nt, nd Extr",0
+342,no edema Labs / Radiology 228 K/uL 11.3 g/dL 100 mg/dL 1.5 mg/dL 25 mEq/L 4.3 mEq/L 31 mg/dL 107 mEq/L 144 mEq/L 35.6 % 6.6 K/uL [image002.jpg] [**2115-11-2**] 06,0
+343,05 AM WBC 6.6 Hct 35.6 Plt 228 Cr 1.5 Glucose 100 Other labs,0
+345,"13.1/24.6/1.1, Ca++",0
+346,"9.1 mg/dL, Mg++",0
+347,"2.0 mg/dL, PO4",0
+348,"3.9 mg/dL Assessment and Plan GASTROINTESTINAL BLEED, LOWER (HEMATOCHEZIA, BRBPR, GI BLEED, GIB) Assessment and Plan",1
+349,86M admitted with BRBPR.,1
+350,# Communication,0
+351,"Patient, Son, [**Name (NI) 326**] cell [**Telephone/Fax (1) 11102**], home [**Telephone/Fax (1) 11103**] # Disposition",0
+352,pending clinical improvement ICU Care Lines,0
+353,18 Gauge,0
+354,[**2105-9-7**] 9,0
+355,49 PM CHEST (SINGLE VIEW) Clip # [**Clip Number (Radiology) 9393**] Reason,0
+356,evaluate for intra-pulmonary process [**Hospital 2**] MEDICAL CONDITION,0
+357,"78F with limited responsiveness, history of meningioma resection now with concern for infectious source REASON FOR THIS EXAMINATION",1
+358,evaluate for intra-pulmonary process FINAL REPORT INDICATION,0
+359,"History of meningioma resection, now with concern for infection.",1
+360,[**2171-8-1**] 9,0
+361,01 PM CHEST (PA & LAT) Clip # [**Clip Number (Radiology) 73749**] Reason,0
+362,"eval acute process, fluid [**Hospital 3**] MEDICAL CONDITION",1
+363,"80 year old woman with crackles, recent elevation BNP, resistant UTI REASON FOR THIS EXAMINATION",1
+364,"eval acute process, fluid FINAL REPORT PA AND LATERAL CHEST, [**2171-8-1**], AT 2101 HOURS.",1
+365,[**2131-3-25**] 10,0
+366,06 AM CHEST (PORTABLE AP) Clip # [**Clip Number (Radiology) 73688**] Reason,0
+367,please evaluate.,0
+368,Admitting Diagnosis,0
+369,HEMOPHAGOCYTIC LYMPHOHISTIOCYTOSIS;FEVER [**Hospital 2**] MEDICAL CONDITION,1
+370,34 year old man with hx of lymphoma.,0
+371,[**2146-7-25**] 11,0
+372,10 AM PICC LINE PLACMENT SCH Clip # [**Clip Number (Radiology) 79339**] Reason,0
+373,IR placement of PICC Admitting Diagnosis,0
+374,LEUKOPENIA; FEVER This is a power pick ********************************* CPT Codes ******************************** * [**Numeric Identifier 545**] EXCH PERPHERAL W/O [**Numeric Identifier 546**] FLUORO GUID PLCT/REPLCT/REMOVE * **************************************************************************** [**Hospital 2**] MEDICAL CONDITION,1
+375,"58 year old woman with endocarditis requiring PICC, failed regular picc placement and needs IR guidance REASON FOR THIS EXAMINATION",1
+376,IR placement of PICC FINAL REPORT INDICATION,0
+377,"58-year-old woman with endocarditis requiring PICC, failed regular PICC placement and needs IR guidance.",0
+381,LEUKOPENIA; FEVER This is a power pick FINAL REPORT (Cont),1
+382,[**2127-8-14**] 8,0
+383,14 AM MR PITUITARY W&W/O CONTRAST; MR HEAD W & W/O CONTRAST Clip # [**Clip Number (Radiology) 26478**] -59 DISTINCT PROCEDURAL SERVICE Reason,0
+384,"neurosarcoidosis, s/p 6 cycles of cytoxan, req mri sella & b Contrast",0
+385,MAGNEVIST Amt,0
+386,16 [**Hospital 2**] MEDICAL CONDITION,0
+387,54 year old woman with REASON FOR THIS EXAMINATION,1
+388,"neurosarcoidosis, s/p 6 cycles of cytoxan, req mri sella & brain w/gadolinium FINAL REPORT INDICATION",0
+389,Follow up sarcoidosis.,0
+390,[**2157-3-20**] 3,0
+391,23 PM CHEST (PA & LAT) Clip # [**Clip Number (Radiology) 67771**] Reason,0
+392,eval for infiltrate [**Hospital 2**] MEDICAL CONDITION,0
+393,"20 year old woman with DM type 1 in DKA, pls eval for infiltrate/pna REASON FOR THIS EXAMINATION",1
+394,eval for infiltrate FINAL REPORT HISTORY,0
+395,20-year-old woman with diabetes and DKA.,1
+396,[**2166-4-16**] 1,0
+397,03 PM CT HEAD W/O CONTRAST Clip # [**Clip Number (Radiology) 59298**] Reason,0
+398,Rule out of bleeding in brain and rule out pulmonary anaboli [**Hospital 2**] MEDICAL CONDITION,1
+399,53 year old woman 191.9 REASON FOR THIS EXAMINATION,1
+400,Rule out of bleeding in brain and rule out pulmonary anabolism.,1
+401,Head ct first No contraindications for IV contrast WET READ,0
+402,JXRl WED [**2166-4-16**] 2,0
+403,45 PM small right frontal lobe linear hyperdensity (2,1
+404,20) c/w small focus of resolving blood in comparison to MR [**2166-2-7**].,1
+407,Rule out of bleeding in brain and rule out pulmonary anaboli FINAL REPORT (Cont),1

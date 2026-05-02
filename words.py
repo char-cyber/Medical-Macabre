@@ -67,6 +67,7 @@ def get_valid_sentences(df_subset, label):
         sections = split_sections(text)
         for si in sections: 
             #clean_text = str(si).replace('\n', ' ')
+            placeholders.clear()
             sic = re.sub(r'_+', '\n', si)
             if 'discharge diagnosis' in sic.lower() or 'discharge condition' in sic.lower() or 'secondary diagnosis' in sic.lower():
                 #content = re.sub(r'discharge diagnosis\s*:?\s*', '', sic, flags=re.IGNORECASE)
@@ -105,19 +106,16 @@ def get_valid_sentences(df_subset, label):
                     if pi.count(":")>1:
                         pts = [p.strip() for p in pi.split(":")]
                         pts = [word for word in pts if word not in section_headers]
-                        for i in range(1, len(pts),2):
-                            arr = pts[i-1]+" : "+pts[i]
-                            arr = re.sub(r'\s+', ' ', arr)
-                            valid.append({'text': arr, 'label': label})
-                    else:
-                        if len(pi)>5:
-                            pi = re.sub(r'\s+', ' ', pi.strip())
-                            valid.append({'text': pi, 'label': label})
+                        for i in range(0, len(pts)):
+                            arr = pts[i]
+                            if len(arr)>1:
+                                arr = re.sub(r'\s+', ' ', arr)
+                                valid.append({'text': arr, 'label': label})
     return valid
-pos_data = get_valid_sentences(yeses, 1)
-neg_data = get_valid_sentences(nos, 0)
-final_data = pos_data + neg_data
-train_df = pd.DataFrame(final_data).reset_index(drop=True)
-train_df = train_df.drop_duplicates(subset=['text'], keep='first')
-output_file = 'train_data_initial_with_diagnosis.csv'
-train_df.to_csv(output_file) #see if we need to set to true
+# pos_data = get_valid_sentences(yeses, 1)
+# neg_data = get_valid_sentences(nos, 0)
+# final_data = pos_data + neg_data
+# train_df = pd.DataFrame(final_data).reset_index(drop=True)
+# train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+# output_file = 'train_data_initial_with_diagnosis.csv'
+# train_df.to_csv(output_file) #see if we need to set to true
