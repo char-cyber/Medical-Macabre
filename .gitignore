@@ -8,3 +8,6 @@ mydata.db
 *.zip
 *.parquet
 data/
+clinicalbert_icd_classifier/
+clinicalbert_results/
+__pycache__/

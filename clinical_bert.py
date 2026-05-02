@@ -1,28 +1,6 @@
 
 
 
-# import numpy as np
-# import torch
-# import torch.nn as nn
-# import torch.optim as optim
-# from torch.utils.data import Dataset, DataLoader
-# import pandas as pd 
-# from sklearn.model_selection import train_test_split
-# import nltk
-# from nltk.tokenize import word_tokenize
-# import string
-# import re
-# from tqdm import tqdm
-# import math
-# from datasets import Dataset
-# from sklearn.metrics import accuracy_score, precision_recall_fscore_support
-# from transformers import (
-#     AutoTokenizer,
-#     AutoModelForSequenceClassification,
-#     TrainingArguments,
-#     Trainer
-# )
-
 import torch
 import pandas as pd
 
@@ -35,13 +13,14 @@ from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification,
     TrainingArguments,
-    Trainer
+    Trainer,
+    TrainerCallback
 )
 
 print("Starting training...")
 
 # LOAD DATA -----------------------------------------------------------------------------------------
-df = pd.read_csv("balanced_sbert_train.csv")
+df = pd.read_csv("final_sentence_dataset.csv")
 df = df.dropna(subset=["text", "label"])
 df["text"] = df["text"].astype(str)
 df["label"] = df["label"].astype(int)
@@ -110,62 +89,51 @@ model = AutoModelForSequenceClassification.from_pretrained(
 
 
 # METRICS  -----------------------------------------------------------------------------------------
-def compute_metrics(pred):
-    logits, labels = pred
-    preds = logits.argmax(axis=1)
+# def compute_metrics(pred):
+#     logits, labels = pred
+#     preds = logits.argmax(axis=1)
+
+#     precision, recall, f1, _ = precision_recall_fscore_support(
+#         labels,
+#         preds,
+#         average="binary"
+#     )
+
+#     acc = accuracy_score(labels, preds)
+
+#     return {
+#         "accuracy": acc,
+#         "precision": precision,
+#         "recall": recall,
+#         "f1": f1
+#     }
+def compute_metrics(eval_pred):
+    logits, labels = eval_pred
+    preds = logits.argmax(axis=-1)
 
     precision, recall, f1, _ = precision_recall_fscore_support(
-        labels,
-        preds,
-        average="binary"
+        labels, preds, average="binary"
     )
-
     acc = accuracy_score(labels, preds)
 
     return {
         "accuracy": acc,
         "precision": precision,
         "recall": recall,
-        "f1": f1
+        "f1": f1,
     }
 
-
-# # TRAINING SETUP  -----------------------------------------------------------------------------------------
-# training_args = TrainingArguments(
-#     output_dir="./clinicalbert_results",
-#     eval_strategy="epoch",
-#     save_strategy="epoch",
-#     learning_rate=2e-5,
-#     per_device_train_batch_size=16,
-#     per_device_eval_batch_size=16,
-#     num_train_epochs=3,
-#     weight_decay=0.01,
-#     load_best_model_at_end=True,
-#     metric_for_best_model="f1",
-#     logging_dir="./logs",
-#     logging_steps=50
-# )
-
-# trainer = Trainer(
-#     model=model,
-#     args=training_args,
-#     train_dataset=train_ds,
-#     eval_dataset=val_ds,
-#     processing_class=tokenizer,
-#     compute_metrics=compute_metrics,
-# )
-
-# # TRAIN AND TEST  -----------------------------------------------------------------------------------------
-# trainer.train()
-
-# results = trainer.evaluate(test_ds)
-# print(results)
-
-# # SAVE MODEL  -----------------------------------------------------------------------------------------
-# trainer.save_model("./clinicalbert_icd_classifier")
-# tokenizer.save_pretrained("./clinicalbert_icd_classifier")
-
-
+# NICE METRICS OUTPUT -----------------------------------------------------------------------------------------
+class PrettyMetricsCallback(TrainerCallback):
+    def on_evaluate(self, args, state, control, metrics, **kwargs):
+        print(
+            f"Epoch {state.epoch:.2f} | "
+            f"Loss: {metrics.get('eval_loss', 0):.4f} | "
+            f"Acc: {metrics.get('eval_accuracy', 0):.4f} | "
+            f"F1: {metrics.get('eval_f1', 0):.4f} | "
+            f"Prec: {metrics.get('eval_precision', 0):.4f} | "
+            f"Rec: {metrics.get('eval_recall', 0):.4f}"
+        )
 
 # TRAINING SETUP  -----------------------------------------------------------------------------------------
 training_args = TrainingArguments(
@@ -178,7 +146,7 @@ training_args = TrainingArguments(
     learning_rate=2e-5,                 #hypeparams
     per_device_train_batch_size=16,
     per_device_eval_batch_size=16,
-    num_train_epochs=3,
+    num_train_epochs=10,
     weight_decay=0.01,
 
     load_best_model_at_end=True,
@@ -197,6 +165,7 @@ trainer = Trainer(
     eval_dataset=val_ds,
     processing_class=tokenizer,
     compute_metrics=compute_metrics,
+    callbacks=[PrettyMetricsCallback()],
 )
 
 # TRAIN AND TEST  -----------------------------------------------------------------------------------------
