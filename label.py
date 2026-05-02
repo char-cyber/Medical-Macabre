@@ -1,6 +1,7 @@
 import pandas as pd
 import nltk
 import os
+import re
 import random
 from nltk.tokenize import sent_tokenize
 
@@ -10,69 +11,81 @@ try:
     nltk.download('punkt_tab')
 except:
     pass
-
-path = r'C:\Users\siyab\OneDrive\Desktop\CSCE421\final'
-
-def prepare_balanced_data():
-    # Load your local MIMIC CSVs
-    print("Loading local CSV files... (This may take a minute)")
-    notes = pd.read_csv(os.path.join(path, 'NOTEEVENTS.csv'))
-    diagnoses = pd.read_csv(os.path.join(path, 'DIAGNOSES_ICD.csv'))
-
-    # Identify admissions that have ICD codes
-    useful_hadms = diagnoses['HADM_ID'].unique()
+useful_patterns = [
+    # Explicit diagnoses
+    r'diagnosed with', r'dx of', r'admitted for', r'treatment for',
+    r'history of', r'with.*cancer', r'with.*diabetes', r'with.*hypertension',
     
-    # Take the top 2500 notes for each category to extract sentences from
-# Shuffling and assigning in one go
-    pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(frac=1, random_state=42)
-    neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(frac=1, random_state=42)
-    def get_valid_sentences(df_subset, label):
-        valid = []
-        # Keywords that suggest a sentence is valuable for ICD coding
-        medical_keywords = ['history', 'diagnosis', 'acute', 'chronic', 'syndrome', 'pain', 'failure', 'patient']
-        
-        for text in df_subset['TEXT'].dropna():
-            # Basic cleanup: remove newlines so sentence splitting is more accurate
-            clean_text = str(text).replace('\n', ' ')
-            sentences = sent_tokenize(clean_text)
-            
-            for s in sentences:
-                words = s.split()
-                # Use your 20-128 word limit
-                if 20 <= len(words) <= 128:
-                    s_lower = s.lower()
-                    
-                    # For LABEL 1: Only keep it if it looks like a real clinical statement
-                    if label == 1:
-                        if any(kw in s_lower for kw in medical_keywords):
-                            valid.append({'text': s.strip(), 'label': label})
-                    
-                    # For LABEL 0: Just keep it (Nursing/Social work text is naturally less codable)
-                    else:
-                        valid.append({'text': s.strip(), 'label': label})
-        return valid
+    # Specific conditions
+    r'acute', r'chronic', r'secondary to', r'due to', r'related to',
+    r'complicated by', r'with.*comorbidity', r'major'
+]
+symptom_patterns = [
+    r'complains of', r'presented with', r'c/o', r'reports',
+    r'endorses', r'experiencing', r'symptoms include',
+    r'fever', r'pain', r'shortness of breath', r'nausea',
+    r'vomiting', r'diarrhea', r'cough', r'fatigue'
+]
+procedure_patterns = [
+    r'underwent', r'performed', r'procedure', r'surgery',
+    r'biopsy', r'resection', r'repair', r'replacement',
+    r'intubation', r'ventilation', r'dialysis'
+]
+medication_patterns = [
+    r'prescribed', r'medication', r'dose', r'mg', r'mcg',
+    r'administered', r'taking', r'on.*therapy'
+]
+lab_patterns = [
+    r'lab.*show', r'results.*reveal', r'elevated', r'decreased',
+    r'positive for', r'negative for', r'count of',
+    r'blood pressure', r'heart rate', r'temperature'
+]
+not_useful_patterns = [
+    # Administrative
+    r'patient seen by', r'follow up', r'appointment',
+    r'discussed with', r'explained to', r'patient instructed',
+    
+    # Negative/rule-out (unless specifying what was ruled out)
+    r'no acute', r'no evidence of', r'negative for',
+    r'denies', r'without', r'excluding', r'non', r'no', r'unremarkable'
+    
+    # Demographic
+    r'year old', r'male|female', r'presenting for',
+    
+    # Generic/Non-specific
+    r'patient is stable', r'will continue', r'to follow',
+    r'as above', r'see below', r'refer to',
 
-    print("Extracting meaningful sentences...")
-    pos_data = get_valid_sentences(pos_notes, 1)
-    neg_data = get_valid_sentences(neg_notes, 0)
+    r'admission date', r'discharge date', r'date of birth'
+]
+df = pd.read_csv('train_data_initial_with_diagnosis.csv')
+def find_label(text, original_label):
+    txt = str(text).lower()
+    #count useful indicators
+    useful_count = 0
+    for pattern in useful_patterns+symptom_patterns+procedure_patterns:
+        if re.search(pattern, txt):
+            useful_count+=1
+    for pattern in lab_patterns+medication_patterns:
+        if re.search(pattern, txt):
+            useful_count+=0.5
+    not_use = 0
+    for pattern in not_useful_patterns:
+        if re.search(pattern, txt):
+            not_use+=1
+    print('useful count', useful_count)
+    print('not useful', not_use)
+    if useful_count>not_use:
+        return 1
+    elif not_use>useful_count:
+        return 0
+    else:
+        return original_label
 
-    # --- 4. Balance the Labels ---
-    # Find out which list is smaller and match the other one to it
-    target_size = min(len(pos_data), len(neg_data))
-    print(f"Balancing dataset to {target_size} rows per label...")
-    
-    final_data = pos_data[:target_size] + neg_data[:target_size]
-    
-    # Shuffle the final list so labels 0 and 1 are mixed
-    train_df = pd.DataFrame(final_data).sample(frac=1).reset_index(drop=True)
-    
-    # Save the file
-    output_file = os.path.join(path, 'balanced_sbert_train.csv')
-    train_df.to_csv(output_file, index=False)
-    
-    print(f"SUCCESS!")
-    print(f"Saved {len(train_df)} rows to: {output_file}")
-    print(f"Label Counts:\n{train_df['label'].value_counts()}")
+df = pd.read_csv('train_data_initial_with_diagnosis.csv')
+df['label'] = df.apply(
+        lambda row: find_label(row['text'], row['label']), 
+        axis=1
+    )
+df.to_csv('train_data_initial_with_diagnosis.csv', index=False)
 
-if __name__ == "__main__":
-    prepare_balanced_data()

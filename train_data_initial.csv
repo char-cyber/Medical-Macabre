@@ -8,7 +8,7 @@
 6,He refused many of his throughout admission.,0
 7,"#Bacteremia: Patient had one blood culture positive for gram positive cocci, MSSA.",1
 8,He was treated with IV vancomycin given penicillin allergy.,1
-9,"Patient will be treated for 10 day course, last day [**2158-8-15**].",1
+9,"Patient will be treated for 10 day course, last day [**2158-8-15**].",0
 10,CARDIAC HISTORY:,0
 11,PERCUTANEOUS CORONARY INTERVENTIONS: [**2158-8-1**] BMS to RCA x 3 3.,1
 12,ESRD [**2-1**] to diabetic nephropathy on HD x7yrs MWF,1
@@ -40,7 +40,7 @@
 38,Mental Status: Clear and coherent.,0
 39,Level of Consciousness: Alert and interactive.,0
 40,Activity Status: Out of Bed with assistance to chair or,1
-41,wheelchair.,1
+41,wheelchair.,0
 42,"Dear Mr. [**Last Name (Titles) 90824**], It was a pleasure taking care of you during your recent admission to [**Hospital1 18**].",0
 43,Admission Date : [**2181-5-4**] Discharge Date,0
 44,Date of Birth : [**2132-1-15**] Sex,0
@@ -66,8 +66,8 @@
 64,General Instructions ?,0
 65,Take your pain medicine as prescribed.,0
 66,"Exercise should be limited to walking; no lifting, straining, or excessive bending.",0
-67,"Increase your intake of fluids and fiber, as narcotic pain medicine can cause constipation.",1
-68,"We generally recommend taking an over the counter stool softener, such as Docusate (Colace) while taking narcotic pain medication.",1
+67,"Increase your intake of fluids and fiber, as narcotic pain medicine can cause constipation.",0
+68,"We generally recommend taking an over the counter stool softener, such as Docusate (Colace) while taking narcotic pain medication.",0
 69,"**** Continue Nimodipine as prescribed, if there is an high co-pay please call our office prior to purchasing.",0
 70,s/p Motor vehicle crash,1
 71,Comminuted left femur fracture,1
@@ -116,7 +116,7 @@
 114,Patient's hearing improved spontaneously.,0
 115,He should have ENT follow-up as an outpatient if he continues to have further issues.,1
 116,There is no evidence of caliber change in the anterior or posterior circulation to suggest vasospasm.,0
-117,Evaluation for residual filling of the previously coiled distal left anterior cerebral artery aneurysm is limited by streak artifact.,0
+117,Evaluation for residual filling of the previously coiled distal left anterior cerebral artery aneurysm is limited by streak artifact.,1
 118,No additional aneurysms are identified.,0
 119,IMPRESSION: 1.,0
 120,Decreased subarachnoid hemorrhage.,1

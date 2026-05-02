@@ -55,7 +55,7 @@ def split_sections(text):
     return results
 
 #split colons
-section_headers = ["Discharge Diagnosis", 'Discharge Condition', 'Discharge Instructions', 'Social History', 'Family History', 'Chief Complaint', 'Past Medical History', 'Physical Exam', 'Medications', 'Allergies']
+section_headers = ['Discharge Condition', 'Discharge Instructions', 'Social History', 'Family History', 'Chief Complaint', 'Past Medical History', 'Physical Exam', 'Medications', 'Allergies']
 def remove_section_headers(txt):
     for h in section_headers:
         pattern = re.compile(r'\b' + re.escape(h) + r'\s*:?\s*\n?', re.IGNORECASE)
@@ -69,8 +69,8 @@ def get_valid_sentences(df_subset, label):
             #clean_text = str(si).replace('\n', ' ')
             sic = re.sub(r'_+', '\n', si)
             if 'discharge diagnosis' in sic.lower() or 'discharge condition' in sic.lower() or 'secondary diagnosis' in sic.lower():
-                content = re.sub(r'discharge diagnosis\s*:?\s*', '', sic, flags=re.IGNORECASE)
-                content = re.sub(r'discharge condition\s*:?\s*', '', content, flags=re.IGNORECASE)
+                #content = re.sub(r'discharge diagnosis\s*:?\s*', '', sic, flags=re.IGNORECASE)
+                content = re.sub(r'discharge condition\s*:?\s*', '', sic, flags=re.IGNORECASE)
                 content = re.sub(r'secondary diagnosis\s*:?\s*', '', content, flags=re.IGNORECASE)
                 lines = content.split('\n')
                 for line in lines:
@@ -82,6 +82,7 @@ def get_valid_sentences(df_subset, label):
             sentences = sent_tokenize(val)
             #split up discharge sections anyw
             for s in sentences:
+                #placeholders = {}
                 hyphen = False
                 inter = []
                 if '-' in s:
@@ -117,5 +118,6 @@ pos_data = get_valid_sentences(yeses, 1)
 neg_data = get_valid_sentences(nos, 0)
 final_data = pos_data + neg_data
 train_df = pd.DataFrame(final_data).reset_index(drop=True)
-output_file = 'train_data_initial.csv'
+train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+output_file = 'train_data_initial_with_diagnosis.csv'
 train_df.to_csv(output_file) #see if we need to set to true
