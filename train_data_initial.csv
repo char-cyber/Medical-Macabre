@@ -1,35 +1,35 @@
-row_id,text,label
+,text,label
 0,LV gram revealed LVEF of 20%.,1
 1,On HD3 patient was taken to the cath lab and had successful stenting of his left circumflex.,1
 2,He was continued on plavix and aspirin throughout admission.,1
 3,# ESRD on HD: Patient receives chronic HD on MWF schedule.,1
-4,Patient's electrolytes were monitored closely throughout admission.,1
-5,Patient was dialyzed on his normal schedule and pressures tolerated this without issue.,1
-6,He refused many of his throughout admission.,1
+4,Patient's electrolytes were monitored closely throughout admission.,0
+5,Patient was dialyzed on his normal schedule and pressures tolerated this without issue.,0
+6,He refused many of his throughout admission.,0
 7,"#Bacteremia: Patient had one blood culture positive for gram positive cocci, MSSA.",1
 8,He was treated with IV vancomycin given penicillin allergy.,1
 9,"Patient will be treated for 10 day course, last day [**2158-8-15**].",1
-10,CARDIAC HISTORY:,1
+10,CARDIAC HISTORY:,0
 11,PERCUTANEOUS CORONARY INTERVENTIONS: [**2158-8-1**] BMS to RCA x 3 3.,1
 12,ESRD [**2-1**] to diabetic nephropathy on HD x7yrs MWF,1
 13,Osteomyelitis of the spine with resultant paraplegia,1
 14,Hyperparathyroidism,1
 15,Left BKA [**2-1**] to gangrene,1
 16,Right arm fistula,1
-17,Single Male.,1
-18,Has been on disability in his left BKA.,1
-19,Lives in a nursing home.,1
-20,Tobacco history: Denies,1
-21,ETOH: Denies,1
-22,Illicit drugs: Denies,1
-23,"No of early MI, arrhythmia, cardiomyopathies, or sudden cardiac death; otherwise non-contributory.",1
+17,Single Male.,0
+18,Has been on disability in his left BKA.,0
+19,Lives in a nursing home.,0
+20,Tobacco history: Denies,0
+21,ETOH: Denies,0
+22,Illicit drugs: Denies,0
+23,"No of early MI, arrhythmia, cardiomyopathies, or sudden cardiac death; otherwise non-contributory.",0
 24,Significant for diabetes,1
-25,Admission Exam : GENERAL,1
+25,Admission Exam : GENERAL,0
 26,Actos 30 mg Tablet Sig: One (1) Tablet PO once a day.,1
 27,Discharge Disposition: Extended Care,1
 28,Facility: Colonial Heights Care and Rehabilitation Center,1
-29,[**Hospital1 487**],1
-30,Primary Diagnosis:,1
+29,[**Hospital1 487**],0
+30,Primary Diagnosis:,0
 31,1.  Cardiogenic shock,1
 32,2.  Left circumflex stenosis,1
 33,1.  Coronary artery disease,1
@@ -37,161 +37,162 @@ row_id,text,label
 35,3.  Diabetes mellitus type II,1
 36,4.  Peripheral vascular disease,1
 37,5.  Chronic right heel ulcer,1
-38,Mental Status: Clear and coherent.,1
-39,Level of Consciousness: Alert and interactive.,1
-40,Activity Status: Out of Bed with assistance to chair or wheelchair.,1
-41,"Dear Mr. [**Last Name (Titles) 90824**], It was a pleasure taking care of you during your recent admission to [**Hospital1 18**].",1
-42,Admission Date : [**2181-5-4**] Discharge Date,1
-43,Date of Birth : [**2132-1-15**] Sex,1
-44,Service: SURGERY,1
-45,Patient recorded as having No Known to Drugs,1
-46,Attending:[**First Name3 (LF) 371**] s/p Motor vehicle crash,1
-47,Major Surgical or Invasive Procedure: ORIF left femur fracture,1
-48,History of Present Illness: 49M with + EtOH s/p motor vehicle crash; restrained driver vs. tree.,1
-49,He was transported to [**Hospital1 18**] for further care.,1
-50,Hypothyroidism,1
-51,Noncontributory,1
-52,Pertinent Results : [**2181-5-4**] 08,1
-53,16PM GLUCOSE-151* LACTATE-5.9* [**2181-5-4**] 03 : 09PM WBC-13.,1
-54,Disp : *16 Capsule(s)* Refills,1
-55,Discharge Disposition: Home,1
-56,SAH,1
-57,hydrocephalus,1
-58,intracranial hypertension,1
-59,Pyrexia,1
-60,Mental Status: Clear and coherent.,1
-61,Level of Consciousness: Alert and interactive.,1
-62,Activity Status: Ambulatory,1
-63,Independent.,1
-64,General Instructions ?,1
-65,Take your pain medicine as prescribed.,1
-66,"Exercise should be limited to walking; no lifting, straining, or excessive bending.",1
+38,Mental Status: Clear and coherent.,0
+39,Level of Consciousness: Alert and interactive.,0
+40,Activity Status: Out of Bed with assistance to chair or,1
+41,wheelchair.,1
+42,"Dear Mr. [**Last Name (Titles) 90824**], It was a pleasure taking care of you during your recent admission to [**Hospital1 18**].",0
+43,Admission Date : [**2181-5-4**] Discharge Date,0
+44,Date of Birth : [**2132-1-15**] Sex,0
+45,Service: SURGERY,1
+46,Patient recorded as having No Known to Drugs,0
+47,Attending:[**First Name3 (LF) 371**] s/p Motor vehicle crash,1
+48,Major Surgical or Invasive Procedure: ORIF left femur fracture,1
+49,History of Present Illness: 49M with + EtOH s/p motor vehicle crash; restrained driver vs. tree.,1
+50,He was transported to [**Hospital1 18**] for further care.,0
+51,Hypothyroidism,1
+52,Noncontributory,0
+53,Pertinent Results : [**2181-5-4**] 08,0
+54,16PM GLUCOSE-151* LACTATE-5.9* [**2181-5-4**] 03 : 09PM WBC-13.,1
+55,Disp : *16 Capsule(s)* Refills,0
+56,Discharge Disposition: Home,0
+57,SAH,1
+58,hydrocephalus,1
+59,intracranial hypertension,1
+60,Pyrexia,1
+61,Mental Status: Clear and coherent.,0
+62,Level of Consciousness: Alert and interactive.,0
+63,Activity Status: Ambulatory - Independent.,1
+64,General Instructions ?,0
+65,Take your pain medicine as prescribed.,0
+66,"Exercise should be limited to walking; no lifting, straining, or excessive bending.",0
 67,"Increase your intake of fluids and fiber, as narcotic pain medicine can cause constipation.",1
 68,"We generally recommend taking an over the counter stool softener, such as Docusate (Colace) while taking narcotic pain medication.",1
-69,"**** Continue Nimodipine as prescribed, if there is an high co-pay please call our office prior to purchasing.",1
+69,"**** Continue Nimodipine as prescribed, if there is an high co-pay please call our office prior to purchasing.",0
 70,s/p Motor vehicle crash,1
 71,Comminuted left femur fracture,1
 72,Acute blood loss anemia,1
-73,Mental Status: Clear and coherent.,1
-74,Activity Status: Out of Bed with assistance to chair or wheelchair.,1
-75,Level of Consciousness: Alert and interactive.,1
-76,You may touch down weight bear only on your left leg.,1
-77,You should AVOID drinking alcohol or taking illicit drugs as these behaviors put you at risk for further injuries.,1
-78,"Followup Instructions: Follow up in 2 weeks Dr. [**Last Name (STitle) 7376**], Orthopedics Trauma; call [**Telephone/Fax (1) 1228**] for an appointment.",1
-79,Follow up after discharge from rehab with your PCP.,1
-80,Completed by:[**2181-5-8**],1
-81,Active Issues : # Cardiogenic Shock,1
-82,On HD6 patient was successfully weaned from dopamine and was maintaining a stable blood pressure.,1
-83,He maintained pressures through dialysis as well.,1
-84,He was restarted on his home anti-hypertensives prior to discharge.,1
-85,"# CAD: Patient did not have prior history of known CAD, but recent TTE from [**5-/2158**] revealed anterolateral and apical defects consistent with CAD.",1
-86,Patient presented on [**8-1**] with RCA infarct that required BMS x3.,1
-87,Cardiac cath also revealed 90% LCx disease and completely occluded LAD that was presumed chronic.,1
-88,[**2181-5-4**] 3 : 29 PM CHEST (PORTABLE AP); -77 BY DIFFERENT PHYSICIAN [**Name Initial (PRE) 7**] # [**Clip Number (Radiology) 82593**] Reason,1
-89,49 year old man s/p MVC w/ hip fracture postop intubated wit Admitting Diagnosis : S/P MOTOR VEHICLE ACCIDENT [**Hospital 2**] MEDICAL CONDITION,1
-90,Eval for acute lung pathology or trauma.,1
-91,REASON FOR THIS EXAMINATION: 49 year old man s/p MVC w/ hip fracture postop intubated with massive blood loss and metabolic acidosis.,1
-92,Eval for acute lung pathology or trauma.,1
-93,FINAL REPORT PORTABLE CHEST [**2181-5-4**],1
-94,COMPARISON: Study of earlier the same date.,1
-95,INDICATION: Intubated.,1
-96,"FINDINGS: Interval placement of endotracheal tube, with tip terminating 5.8 cm above carina.",1
-97,"Cardiomediastinal contours are similar in appearance to the prior study, and lungs are remarkable for multifocal areas of atelectasis, most pronounced at the left lung base and right retrocardiac region.",1
-98,Coexisting aspiration is possible.,1
-99,HCTZ was held in the setting of hypercalcemia.,1
-100,The home dose of hydralazine was increased to 75 mg QID and imdur was started at a dose of 30 mg daily with subsequent improvement in blood pressure control.,1
-101,"Renal ultrasound did not reveal evidence of renal artery stenosis, consistent with the results of an MRA in [**2195-4-18**].",1
-102,# Hypercalcemia: [**Year (4 digits) 32883**] calcium peaked at 12.7 with a peak ionized calcium of 1.51.,1
-103,The level improved modestly with aggressive IVF.,1
-104,[**Name (NI) 32883**] PTH was low.,1
-105,"Workup for an underlying cause was unremarkable, including [**Name (NI) **] cortisol, SPEP/UPEP, chest x-ray, non-contrast CT of the chest/abdomen/pelvis, and bone scan.",1
-106,"Per vascular surgery, the patient should have an ABI checked as an outpatient.",1
-107,# Bilateral hearing loss: Patient reported acute hearing deficit coinciding with his myocardial infarction.,1
-108,No obstructive cause was apparent on otoscopic examination.,1
-109,Hearing loss appeared to be symmetric.,1
-110,He was not given otoxic drugs.,1
-111,Ischemia in the setting of cardiogenic shock is also a possiblity.,1
-112,"Symptoms were not consistent with CVA causing hearing loss, as he had no associated symptoms of nystagmus, nausea or dizziness as would be expected.",1
-113,Patient's hearing improved spontaneously.,1
-114,He should have ENT follow-up as an outpatient if he continues to have further issues.,1
-115,There is no evidence of caliber change in the anterior or posterior circulation to suggest vasospasm.,0
-116,Evaluation for residual filling of the previously coiled distal left anterior cerebral artery aneurysm is limited by streak artifact.,0
-117,No additional aneurysms are identified.,0
-118,IMPRESSION: 1.,0
-119,Decreased subarachnoid hemorrhage.,0
-120,Redistribution of intraventricular hemorrhage without evidence of new hemorrhage.,0
-121,Stable ventricular size without hydrocephalus.,0
-122,No evidence of vasospasm.,0
-123,CTA Head [**2161-8-27**] : IMPRESSION,0
-124,Decrease in extent and density of subarachnoid hemorrhage.,0
-125,No new hemorrhage.,0
-126,Stable ventricular size without hydrocephalus.,0
-127,"The A1 and A2 segments of the left anterior cerebral artery are minimally decreased in caliber compared to study on [**8-20**], [**2161**].",0
-128,Left vertebral artery arteriogram shows filling of the left vertebral artery with reflux into the right vertebral artery.,0
-129,Both posterior cerebral arteries are seen well.,0
-130,Both AICA and superior cerebellar artery are seen well.,0
-131,The AICA on the left is an AICA-PICA configuration.,0
-132,The right PICA is seen normally.,0
-133,Left internal carotid artery arteriogram status post coil embolization shows that the aneurysm is now obliterated.,0
-134,Right common femoral artery arteriogram shows widely patent right common femoral artery.,0
-135,IMPRESSION: [**Known firstname 12138**] [**Known lastname 39239**] underwent cerebral angiography and coil embolization of a 2.2 mm distal anterior cerebral artery aneurysm.,0
-136,There were no complications.,0
-137,"At the time of discharge, his dose was 300mg po BID.",0
-138,"He will continue this for 11 days, ending [**2158-8-21**].",0
-139,"At that time, he should be transitioned to amiodarone 200mg po daily.",0
-140,"Despite CHADS2 score of 3, patient was felt to be a poor candidate for anticoagulation given poor medication compliance and fall risk.",0
-141,Patient was in sinus rhythm and hemodynamically stable at the time of discharge.,0
-142,"# HTN: Patient was in cardiogenic shock at the time of admission, therefore his home anti-hypertensives were held.",0
-143,Since BPs were still lowish at discharge norvasc was discontinued and valsartan was continued but at a much lower dose (40mg [**Hospital1 **]).,0
-144,"We now catheterized the above-mentioned vessels and AP, lateral filming was done.",0
-145,This revealed a 2 mm aneurysm at the distal anterior cerebral artery at the branch point of a frontopolar branch.,0
-146,The aneurysm measured about 2.5 mm in size.,0
-147,Therefore we exchanged out the [**Doctor Last Name 586**] 2 catheter in the left internal carotid artery for a Neuron 6 French catheter.,0
-148,The aneurysm itself was catheterized with an SL-10 microcatheter and Synchro wire.,0
-149,The aneurysm was coiled with a single coil of 2.2 mm into 3 mm 360 UltraSoft Target coil.,0
-150,"Following this, there was very minimal filling at the base of the aneurysm.",0
-151,The cause of this problem remains unclear despite many tests.,0
-152,Please stop taking TRIAMTERENE-HYDROCHLOROTHIAZIDE because it can raise calcium levels.,0
-153,It is imperative that you stay well-hydrated by drinking plenty of fluids to help keep the calcium level down.,0
-154,You had a urinary tract infection which was partially treated with the antibiotic ciprofloxacin.,0
-155,Please continue taking this medication through Monday [**1-27**].,0
-156,The following changes to your blood pressure were recommended: 1) Start taking ISOSORBIDE MONONITRATE (IMDUR) 30 mg daily.,0
-157,2) Increase HYDRALAZINE to 75 every 6 hours.,0
-158,3) Discontinue TRIAMTERENE-HYDROCHLOROTHIAZIDE.,0
-159,"Please have repeat blood work done on Monday, [**1-27**].",0
-160,Pt received some juice prior to transfer to the ED.,0
-161,VS on arrival to ED: T 97.8 BP 194/90 HR 56 RR 18 Sat 100% on RA.,0
-162,"BS on arrival was noted to be 35, she received a total of 2.5 amps of dextrose, Glucagon, Octreotide 50mcg, 1L of NS and started on D5 1/2 NS for BS that would transiently come up above 100 and then fall back to 40s.",0
-163,EKGs were essentially unchanged and CXR was clear.,0
-164,"Pt was given Hydralazine 50mg X 1 po for sbp in 200s, followed by Hydralazine 10mg IV.",0
-165,STAPH AUREUS COAG + | OXACILLIN------------,0
-166,Aerobic Bottle Gram Stain (Final [**2158-8-5**]): Reported to and read back by [**First Name4 (NamePattern1) **] [**Last Name (NamePattern1) 90823**] @ 2232 ON [**8-5**] -[**Numeric Identifier 28124**].,0
-167,GRAM POSITIVE COCCI.,0
-168,IN PAIRS AND CLUSTERS.,0
-169,Anaerobic Bottle Gram Stain (Final [**2158-8-5**]): GRAM POSITIVE COCCI IN PAIRS AND CLUSTERS.,0
-170,Imaging : CXR AP [**2158-8-4**],0
-171,"Lung volumes are quite low, making evaluation of the lungs difficult.",0
-172,There are multiple bilateral rib fractures.,0
-173,I see no pneumothorax.,0
-174,TTE [**2158-8-5**]: The left atrium is mildly dilated.,0
-175,Disp : *44 Tablet(s)* Refills,0
-176,*2* 9. vancomycin in D5W 1 gram/200 mL Piggyback Sig : One (1) Intravenous HD PROTOCOL (HD Protochol) for 4 days,0
-177,Disp : *4 units* Refills,0
-178,Norvasc 10 mg Tablet Sig : One (1) Tablet PO on non-HD days,0
-179,Sensipar 60 mg Tablet Sig: Two (2) Tablet PO once a day.,0
-180,Diovan 40 mg Tablet Sig : One (1) Tablet PO twice a day,0
-181,13. glipizide 5 mg Tablet Sig: One (1) Tablet PO once a day.,0
-182,No evidence of new hemorrhage or infarction.,0
-183,"Interval placement of a right frontal approach ventricular catheter terminating in the frontal [**Doctor Last Name 534**] of the right lateral ventricle, with no change in ventricular size.",0
-184,"Small amount of intraventricular hemorrhage in the occipital horns and fourth ventricle, unchanged from prior study.",0
-185,Coil pack in the interhemispheric fissure with associated artifact at that level.,0
-186,[**2161-8-21**] Femoral (right) Ultrasound : IMPRESSION,0
-187,[**2161-8-23**] CTA Head : HEAD CTA,0
-188,"Compared with the report of the prior study (images unavailable for review) of [**2193-1-18**], the left ventricle is more hypertrophied with increased severity of mitral regurgitation.",0
-189,"[**1-15**] Head CT No evidence of acute intracranial hemorrhage, edema or mass.",0
-190,[**1-15**] Renal US with dopplers IMPRESSION: Limited examination.,0
-191,Bilateral brisk systolic upstrokes in the main renal arteries at the hilum are present and therefore no evidence of renal artery stenosis is present.,0
-192,Blunted systolic upstrokes of intrarenal waveforms could reflect parenchymal abnormality but cannot be reliably assessed due to limitations of the examination.,0
-193,If further evaluation is required then non,0
-194,gadolinium,0
-195,enhanced MRA may be attempted.,0
+73,Mental Status: Clear and coherent.,0
+74,Activity Status: Out of Bed with assistance to chair or,1
+75,wheelchair.,0
+76,Level of Consciousness: Alert and interactive.,0
+77,You may touch down weight bear only on your left leg.,0
+78,You should AVOID drinking alcohol or taking illicit drugs as these behaviors put you at risk for further injuries.,0
+79,"Followup Instructions: Follow up in 2 weeks Dr. [**Last Name (STitle) 7376**], Orthopedics Trauma; call [**Telephone/Fax (1) 1228**] for an appointment.",0
+80,Follow up after discharge from rehab with your PCP.,0
+81,Completed by:[**2181-5-8**],0
+82,Active Issues : # Cardiogenic Shock,1
+83,On HD6 patient was successfully weaned from dopamine and was maintaining a stable blood pressure.,0
+84,He maintained pressures through dialysis as well.,0
+85,He was restarted on his home anti-hypertensives prior to discharge.,1
+86,"# CAD: Patient did not have prior history of known CAD, but recent TTE from [**5-/2158**] revealed anterolateral and apical defects consistent with CAD.",1
+87,Patient presented on [**8-1**] with RCA infarct that required BMS x3.,1
+88,Cardiac cath also revealed 90% LCx disease and completely occluded LAD that was presumed chronic.,1
+89,[**2181-5-4**] 3 : 29 PM CHEST (PORTABLE AP); -77 BY DIFFERENT PHYSICIAN [**Name Initial (PRE) 7**] # [**Clip Number (Radiology) 82593**] Reason,0
+90,49 year old man s/p MVC w/ hip fracture postop intubated wit Admitting Diagnosis : S/P MOTOR VEHICLE ACCIDENT [**Hospital 2**] MEDICAL CONDITION,1
+91,Eval for acute lung pathology or trauma.,1
+92,REASON FOR THIS EXAMINATION: 49 year old man s/p MVC w/ hip fracture postop intubated with massive blood loss and metabolic acidosis.,1
+93,Eval for acute lung pathology or trauma.,1
+94,FINAL REPORT PORTABLE CHEST [**2181-5-4**],0
+95,COMPARISON: Study of earlier the same date.,0
+96,INDICATION: Intubated.,1
+97,"FINDINGS: Interval placement of endotracheal tube, with tip terminating 5.8 cm above carina.",1
+98,"Cardiomediastinal contours are similar in appearance to the prior study, and lungs are remarkable for multifocal areas of atelectasis, most pronounced at the left lung base and right retrocardiac region.",1
+99,Coexisting aspiration is possible.,1
+100,HCTZ was held in the setting of hypercalcemia.,1
+101,The home dose of hydralazine was increased to 75 mg QID and imdur was started at a dose of 30 mg daily with subsequent improvement in blood pressure control.,1
+102,"Renal ultrasound did not reveal evidence of renal artery stenosis, consistent with the results of an MRA in [**2195-4-18**].",0
+103,# Hypercalcemia: [**Year (4 digits) 32883**] calcium peaked at 12.7 with a peak ionized calcium of 1.51.,1
+104,The level improved modestly with aggressive IVF.,1
+105,[**Name (NI) 32883**] PTH was low.,1
+106,"Workup for an underlying cause was unremarkable, including [**Name (NI) **] cortisol, SPEP/UPEP, chest x-ray, non-contrast CT of the chest/abdomen/pelvis, and bone scan.",0
+107,"Per vascular surgery, the patient should have an ABI checked as an outpatient.",1
+108,# Bilateral hearing loss: Patient reported acute hearing deficit coinciding with his myocardial infarction.,1
+109,No obstructive cause was apparent on otoscopic examination.,0
+110,Hearing loss appeared to be symmetric.,1
+111,He was not given otoxic drugs.,0
+112,Ischemia in the setting of cardiogenic shock is also a possiblity.,1
+113,"Symptoms were not consistent with CVA causing hearing loss, as he had no associated symptoms of nystagmus, nausea or dizziness as would be expected.",1
+114,Patient's hearing improved spontaneously.,0
+115,He should have ENT follow-up as an outpatient if he continues to have further issues.,1
+116,There is no evidence of caliber change in the anterior or posterior circulation to suggest vasospasm.,0
+117,Evaluation for residual filling of the previously coiled distal left anterior cerebral artery aneurysm is limited by streak artifact.,0
+118,No additional aneurysms are identified.,0
+119,IMPRESSION: 1.,0
+120,Decreased subarachnoid hemorrhage.,1
+121,Redistribution of intraventricular hemorrhage without evidence of new hemorrhage.,0
+122,Stable ventricular size without hydrocephalus.,0
+123,No evidence of vasospasm.,0
+124,CTA Head [**2161-8-27**] : IMPRESSION,0
+125,Decrease in extent and density of subarachnoid hemorrhage.,0
+126,No new hemorrhage.,0
+127,Stable ventricular size without hydrocephalus.,0
+128,"The A1 and A2 segments of the left anterior cerebral artery are minimally decreased in caliber compared to study on [**8-20**], [**2161**].",0
+129,Left vertebral artery arteriogram shows filling of the left vertebral artery with reflux into the right vertebral artery.,1
+130,Both posterior cerebral arteries are seen well.,0
+131,Both AICA and superior cerebellar artery are seen well.,0
+132,The AICA on the left is an AICA-PICA configuration.,0
+133,The right PICA is seen normally.,0
+134,Left internal carotid artery arteriogram status post coil embolization shows that the aneurysm is now obliterated.,0
+135,Right common femoral artery arteriogram shows widely patent right common femoral artery.,0
+136,IMPRESSION: [**Known firstname 12138**] [**Known lastname 39239**] underwent cerebral angiography and coil embolization of a 2.2 mm distal anterior cerebral artery aneurysm.,1
+137,There were no complications.,0
+138,"At the time of discharge, his dose was 300mg po BID.",0
+139,"He will continue this for 11 days, ending [**2158-8-21**].",0
+140,"At that time, he should be transitioned to amiodarone 200mg po daily.",0
+141,"Despite CHADS2 score of 3, patient was felt to be a poor candidate for anticoagulation given poor medication compliance and fall risk.",0
+142,Patient was in sinus rhythm and hemodynamically stable at the time of discharge.,0
+143,"# HTN: Patient was in cardiogenic shock at the time of admission, therefore his home anti-hypertensives were held.",1
+144,Since BPs were still lowish at discharge norvasc was discontinued and valsartan was continued but at a much lower dose (40mg [**Hospital1 **]).,0
+145,"We now catheterized the above-mentioned vessels and AP, lateral filming was done.",0
+146,This revealed a 2 mm aneurysm at the distal anterior cerebral artery at the branch point of a frontopolar branch.,1
+147,The aneurysm measured about 2.5 mm in size.,1
+148,Therefore we exchanged out the [**Doctor Last Name 586**] 2 catheter in the left internal carotid artery for a Neuron 6 French catheter.,0
+149,The aneurysm itself was catheterized with an SL-10 microcatheter and Synchro wire.,0
+150,The aneurysm was coiled with a single coil of 2.2 mm into 3 mm 360 UltraSoft Target coil.,0
+151,"Following this, there was very minimal filling at the base of the aneurysm.",0
+152,The cause of this problem remains unclear despite many tests.,0
+153,Please stop taking TRIAMTERENE-HYDROCHLOROTHIAZIDE because it can raise calcium levels.,0
+154,It is imperative that you stay well-hydrated by drinking plenty of fluids to help keep the calcium level down.,0
+155,You had a urinary tract infection which was partially treated with the antibiotic ciprofloxacin.,1
+156,Please continue taking this medication through Monday [**1-27**].,0
+157,The following changes to your blood pressure were recommended: 1) Start taking ISOSORBIDE MONONITRATE (IMDUR) 30 mg daily.,0
+158,2) Increase HYDRALAZINE to 75 every 6 hours.,0
+159,3) Discontinue TRIAMTERENE-HYDROCHLOROTHIAZIDE.,0
+160,"Please have repeat blood work done on Monday, [**1-27**].",0
+161,Pt received some juice prior to transfer to the ED.,0
+162,VS on arrival to ED: T 97.8 BP 194/90 HR 56 RR 18 Sat 100% on RA.,0
+163,"BS on arrival was noted to be 35, she received a total of 2.5 amps of dextrose, Glucagon, Octreotide 50mcg, 1L of NS and started on D5 1/2 NS for BS that would transiently come up above 100 and then fall back to 40s.",1
+164,EKGs were essentially unchanged and CXR was clear.,0
+165,"Pt was given Hydralazine 50mg X 1 po for sbp in 200s, followed by Hydralazine 10mg IV.",0
+166,STAPH AUREUS COAG + | OXACILLIN------------,0
+167,Aerobic Bottle Gram Stain (Final [**2158-8-5**]): Reported to and read back by [**First Name4 (NamePattern1) **] [**Last Name (NamePattern1) 90823**] @ 2232 ON [**8-5**] -[**Numeric Identifier 28124**].,0
+168,GRAM POSITIVE COCCI.,0
+169,IN PAIRS AND CLUSTERS.,0
+170,Anaerobic Bottle Gram Stain (Final [**2158-8-5**]): GRAM POSITIVE COCCI IN PAIRS AND CLUSTERS.,0
+171,Imaging : CXR AP [**2158-8-4**],0
+172,"Lung volumes are quite low, making evaluation of the lungs difficult.",1
+173,There are multiple bilateral rib fractures.,1
+174,I see no pneumothorax.,0
+175,TTE [**2158-8-5**]: The left atrium is mildly dilated.,1
+176,Disp : *44 Tablet(s)* Refills,0
+177,*2* 9. vancomycin in D5W 1 gram/200 mL Piggyback Sig : One (1) Intravenous HD PROTOCOL (HD Protochol) for 4 days,0
+178,Disp : *4 units* Refills,0
+179,Norvasc 10 mg Tablet Sig : One (1) Tablet PO on non-HD days,0
+180,Sensipar 60 mg Tablet Sig: Two (2) Tablet PO once a day.,0
+181,Diovan 40 mg Tablet Sig : One (1) Tablet PO twice a day,0
+182,13. glipizide 5 mg Tablet Sig: One (1) Tablet PO once a day.,0
+183,No evidence of new hemorrhage or infarction.,0
+184,"Interval placement of a right frontal approach ventricular catheter terminating in the frontal [**Doctor Last Name 534**] of the right lateral ventricle, with no change in ventricular size.",0
+185,"Small amount of intraventricular hemorrhage in the occipital horns and fourth ventricle, unchanged from prior study.",0
+186,Coil pack in the interhemispheric fissure with associated artifact at that level.,0
+187,[**2161-8-21**] Femoral (right) Ultrasound : IMPRESSION,0
+188,[**2161-8-23**] CTA Head : HEAD CTA,0
+189,"Compared with the report of the prior study (images unavailable for review) of [**2193-1-18**], the left ventricle is more hypertrophied with increased severity of mitral regurgitation.",1
+190,"[**1-15**] Head CT No evidence of acute intracranial hemorrhage, edema or mass.",0
+191,[**1-15**] Renal US with dopplers IMPRESSION: Limited examination.,0
+192,Bilateral brisk systolic upstrokes in the main renal arteries at the hilum are present and therefore no evidence of renal artery stenosis is present.,0
+193,Blunted systolic upstrokes of intrarenal waveforms could reflect parenchymal abnormality but cannot be reliably assessed due to limitations of the examination.,0
+194,If further evaluation is required then non,0
+195,gadolinium,0
+196,enhanced MRA may be attempted.,0

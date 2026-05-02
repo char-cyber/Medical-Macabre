@@ -54,7 +54,7 @@ def split_sections(text):
         results.extend(sct)
     return results
 
-        #split colons
+#split colons
 section_headers = ["Discharge Diagnosis", 'Discharge Condition', 'Discharge Instructions', 'Social History', 'Family History', 'Chief Complaint', 'Past Medical History', 'Physical Exam', 'Medications', 'Allergies']
 def remove_section_headers(txt):
     for h in section_headers:
@@ -67,8 +67,8 @@ def get_valid_sentences(df_subset, label):
         sections = split_sections(text)
         for si in sections: 
             #clean_text = str(si).replace('\n', ' ')
-            sic = re.sub(r'_+', '', si)
-            if 'discharge diagnosis' in sic.lower() or 'secondary diagnosis' in sic.lower():
+            sic = re.sub(r'_+', '\n', si)
+            if 'discharge diagnosis' in sic.lower() or 'discharge condition' in sic.lower() or 'secondary diagnosis' in sic.lower():
                 content = re.sub(r'discharge diagnosis\s*:?\s*', '', sic, flags=re.IGNORECASE)
                 content = re.sub(r'discharge condition\s*:?\s*', '', content, flags=re.IGNORECASE)
                 content = re.sub(r'secondary diagnosis\s*:?\s*', '', content, flags=re.IGNORECASE)
