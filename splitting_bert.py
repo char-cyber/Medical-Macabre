@@ -43,7 +43,7 @@ nos = df[df['label']==0]
 #     return results
 
 
-def get_valid_sentences(text, min_length=5):
+def get_valid_sentences(text, min_length=20): #should i set min length higher?
 
     if not text or not isinstance(text, str):
         return []

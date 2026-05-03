@@ -73,7 +73,7 @@ test_ds = Dataset.from_pandas(test_df)
 
 # LOAD CLINICAL BERT  -----------------------------------------------------------------------------------------
 # model_name = "emilyalsentzer/Bio_ClinicalBERT"
-model_name = "/scratch/user/kiana.shen22/Bio_ClinicalBERT"
+model_name = "/scratch/user/charu7465/Bio_ClinicalBERT"
 
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
@@ -185,7 +185,7 @@ class PrettyMetricsCallback(TrainerCallback):
 #     disable_tqdm=True          # turns off progress bar visible
 # )
 training_args = TrainingArguments(
-    output_dir="/scratch/user/kiana.shen22/clinicalbert_results",
+    output_dir="/scratch/user/charu7465/clinicalbert_results",
 
     eval_strategy="epoch",
     save_strategy="epoch",
@@ -201,7 +201,7 @@ training_args = TrainingArguments(
     metric_for_best_model="f1",
     greater_is_better=True,
 
-    logging_dir="/scratch/user/kiana.shen22/logs",
+    logging_dir="/scratch/user/charu7465/logs",
     report_to="none",           # prevents wandb/tensorboard issues
     disable_tqdm=True          # turns off progress bar visible
 )
@@ -232,5 +232,5 @@ print(results)
 # trainer.save_model("./clinicalbert_icd_classifier")
 # tokenizer.save_pretrained("./clinicalbert_icd_classifier")
 
-trainer.save_model("/scratch/user/kiana.shen22/clinicalbert_icd_classifier")
-tokenizer.save_pretrained("/scratch/user/kiana.shen22/clinicalbert_icd_classifier")
+trainer.save_model("/scratch/user/charu7465/clinicalbert_icd_classifier")
+tokenizer.save_pretrained("/scratch/user/charu7465/clinicalbert_icd_classifier")
