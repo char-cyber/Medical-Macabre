@@ -1,4 +1,4 @@
-,text,label
+row_id,text,label
 0,Admission Date:  [**2141-4-12**]              Discharge Date:   [**2141-4-16**],0
 1,Date of Birth:  [**2074-3-26**]             Sex:   F,0
 2,Service: MEDICINE,0
@@ -98,7 +98,7 @@
 92,TTE done to r/o PFO/clot.    Response:    HR decreased to 80s-110s on increased Dilt.,1
 93,AF remains moderately    controlled.,1
 94,Plan:    Awaiting read from echo. ?Start Amio vs continued dilt for better rate    control.,0
-95,"Valve replacement,  MV replacement w/[**First Name8 (NamePattern2) **] [**Male First Name (un) 640**] Tissue Valve and #30    Tricuspid Valve ring    Assessment:           Neuro: AOx3, lethargic, weak, MAE, follows commands    consistently           CV:  AV paced at 90 with underlying junctional rhythm, rare    4-6 beats runs of VT, no other ectopy, SBP> 90 on Levo, CT to suction    with minimal serosanginous drainage, no air leak, weak but palpable    pulses           Resp:  LSCTA, C&R yellow/tanish sputum           GI:  Patent foley, draining concentrated urine adequate HUO           GU:  + BS, -Flatus, taking PO s without difficulty           Endo:  BS WNL           Pain: uncomfortable , with only [**2156-12-18**] pain    Action:           CV:  AV paced to help with BP support, titrated Levo to    maintain SBP>90 and MAP>60, 1 unit PRBC given for HCT 22.5, monitored    lytes and repleted PRN (Mag, Ca and K repleted), monitored ABG           Pain:  1 percocet given for pain    Response:           CV:  Able to decrease Levo dose but remains on minimal for    BP support           Pain:  Patient resting comfortably, reporting no pain    Plan:    Continue to monitor, ween Levo as tolerated, monitor HCT",0
+95,"Valve replacement,  MV replacement w/[**First Name8 (NamePattern2) **] [**Male First Name (un) 640**] Tissue Valve and #30    Tricuspid Valve ring    Assessment:           Neuro: AOx3, lethargic, weak, MAE, follows commands    consistently           CV:  AV paced at 90 with underlying junctional rhythm, rare    4-6 beats runs of VT, no other ectopy, SBP> 90 on Levo, CT to suction    with minimal serosanginous drainage, no air leak, weak but palpable    pulses           Resp:  LSCTA, C&R yellow/tanish sputum           GI:  Patent foley, draining concentrated urine adequate HUO           GU:  + BS, -Flatus, taking PO s without difficulty           Endo:  BS WNL           Pain: uncomfortable , with only [**2156-12-18**] pain    Action:           CV:  AV paced to help with BP support, titrated Levo to    maintain SBP>90 and MAP>60, 1 unit PRBC given for HCT 22.5, monitored    lytes and repleted PRN (Mag, Ca and K repleted), monitored ABG           Pain:  1 percocet given for pain    Response:           CV:  Able to decrease Levo dose but remains on minimal for    BP support           Pain:  Patient resting comfortably, reporting no pain    Plan:    Continue to monitor, ween Levo as tolerated, monitor HCT",1
 96,Neonatology,0
 97,"Warm, erythematous, indurated area noted over right posterior leg with puncture site at base.",1
 98,Not clearly tender.,0
@@ -108,7 +108,7 @@
 102,Will restart vancomycin and add meropenem at suggestion of ID.  Film obtained.,0
 103,Will obtain ultrasound in morning.,0
 104,Respiratory Care Note Pt. continues on 1.0 lpm HFNC at 100%.,0
-105,BS clear.  On Lasix.,1
+105,BS clear.  On Lasix.,0
 106,To follow.,0
 107,Nursing Progress Note 0700-1900 *Full Code,0
 108,"*Allergies: Ceclor, PCN, Quinine",0
@@ -118,7 +118,7 @@
 112,"No indications on pain, non-verbal and vitals.",0
 113,"Ativan 2mg PRN x1 for agitation (increased vitals), standing lexapro (anxiety).",1
 114,"Cardiac:  NSR w/o ectopy, HR 79-99, SBP 112-176, A-line MAP 65-108, goal A-line MAP < 100, following NBP for consistancy (A-line w/ ""whip"" @ times so SBP 30-40mmHG higer than NBP).",1
-115,"Metoprolol held this AM for SBP (NBP) under 110, but given this afternoon (may need to change to PRN).",0
+115,"Metoprolol held this AM for SBP (NBP) under 110, but given this afternoon (may need to change to PRN).",1
 116,"hct stable @ 31.1, K repleted this AM and labs this afternoon showed K 3.8, repleted w/ 40mEq KCL PO.",1
 117,"Resp:  Started shift on CPAP 17/10peep, 30%, decreased to [**10-24**] to increase rate and minute volume.",1
 118,"Later abd breathing and tachypnic, hypertensive, tachycardic, so increase Psup back up to 15, tolerating @ this time.",1
