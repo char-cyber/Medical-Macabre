@@ -11,3 +11,6 @@ data/
 clinicalbert_icd_classifier/
 clinicalbert_results/
 __pycache__/
+misc/
+past_testing/
+predictions/

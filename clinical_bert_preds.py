@@ -4,9 +4,13 @@ import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-# -----------------------------
-# Load saved model
-# -----------------------------
+# USED TO SPLIT NOTES INTO SENTENCES!!!
+from words import split_sections
+
+
+# ------------- START MODEL PREDICTIONS -------------
+
+# load saved model
 model_path = "./clinicalbert_icd_classifier"
 print("Starting predicitions")
 
@@ -17,69 +21,164 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model.to(device)
 model.eval()
 
-# -----------------------------
-# Load dataset to test
-# -----------------------------
+# load dataset
 test1 = "test01_text_only.csv"
 test2 = "test02_text_only.csv"
 test3= "test03_text_only.csv"
 
 test_list = [(test1, "test01"), (test2, "test02"), (test3, "test03")]
 
-test = "test03_text_only.csv"
-testNum = "test3"
+# loop through all testing files
+for test, testNum in test_list:
+    # create df and read file
+    df = pd.read_csv(test)  
+    print("Read File:")
+    texts = df["text"].astype(str).tolist()
 
-df = pd.read_csv(test)  # change this filename
-# Change "text" if your column has a different name
-print(df)
-texts = df["text"].astype(str).tolist()
+    # list for predictions and probs
+    predictions = []
+    probabilities = []
 
-# -----------------------------
-# Run predictions
-# -----------------------------
-predictions = []
-probabilities = []
+    batch_size = 16
+    threshold = 0.35
 
-batch_size = 16
+    # loop through all of the notes
+    for note in texts:
+        sentences = split_sections(note)
 
-with torch.no_grad():
-    for i in range(0, len(texts), batch_size):
-        batch_texts = texts[i:i + batch_size]
+        sentence_probs = []
 
-        inputs = tokenizer(
-            batch_texts,
-            padding=True,
-            truncation=True,
-            max_length=128,
-            return_tensors="pt"
-            )
+        with torch.no_grad():
+            for i in range(0, len(sentences), batch_size):
+                batch_texts = sentences[i:i + batch_size]
 
-        inputs = {key: value.to(device) for key, value in inputs.items()}
+                inputs = tokenizer(
+                    batch_texts,
+                    padding=True,
+                    truncation=True,
+                    max_length=128,
+                    return_tensors="pt"
+                )
 
-        outputs = model(**inputs)
-        logits = outputs.logits
+                inputs = {key: value.to(device) for key, value in inputs.items()}
 
-        probs = torch.softmax(logits, dim=1)
-        preds = torch.argmax(probs, dim=1)
+                outputs = model(**inputs)
+                logits = outputs.logits
 
-        predictions.extend(preds.cpu().tolist())
-        probabilities.extend(probs[:, 1].cpu().tolist())
+                probs = torch.softmax(logits, dim=1)
 
-    # -----------------------------
-    # Save output CSV
-    # -----------------------------
-    # df["label"] = predictions
+                sentence_probs.extend(probs[:, 1].cpu().tolist())
 
-    # saved_csv = testNum + "-pred.csv"
-    # df.to_csv(saved_csv, index=False)
+        # note-level heuristic
+        if len(sentence_probs) == 0:
+            note_prob = 0
+        else:
+            note_prob = max(sentence_probs)
+
+        note_pred = int(note_prob >= threshold)
+
+        predictions.append(note_pred)
+        probabilities.append(note_prob)
+
+
     output_df = pd.DataFrame({
-        "row_id": df["row_id"],   # make sure this column exists
-        "prediction": predictions
+        "row_id": df["row_id"],
+        "prediction": predictions,
+        "confidence": probabilities
     })
 
     saved_csv = testNum + "-pred.csv"
     output_df.to_csv(saved_csv, index=False)
-    print("Saved predictions to ", saved_csv)
+    print("Saved predictions to", saved_csv)
+
+
+# -----------------      SENTENCE PARSER
+# loop through all of the notes
+# for note in texts:
+#     sentences = split_sections(note)
+
+#     sentence_probs = []
+
+#     with torch.no_grad():
+#         for i in range(0, len(sentences), batch_size):
+#             batch_texts = sentences[i:i + batch_size]
+
+#             inputs = tokenizer(
+#                 batch_texts,
+#                 padding=True,
+#                 truncation=True,
+#                 max_length=128,
+#                 return_tensors="pt"
+#             )
+
+#             inputs = {key: value.to(device) for key, value in inputs.items()}
+
+#             outputs = model(**inputs)
+#             logits = outputs.logits
+
+#             probs = torch.softmax(logits, dim=1)
+
+#             sentence_probs.extend(probs[:, 1].cpu().tolist())
+
+#     # note-level heuristic
+#     if len(sentence_probs) == 0:
+#         note_prob = 0
+#     else:
+#         note_prob = max(sentence_probs)
+
+#     note_pred = int(note_prob >= threshold)
+
+#     predictions.append(note_pred)
+#     probabilities.append(note_prob)
+
+
+#-----------------------------------------------------------------------------------------------------------------------------
+
+# with torch.no_grad():
+#     for i in range(0, len(texts), batch_size):
+#         batch_texts = texts[i:i + batch_size]
+
+#         inputs = tokenizer(
+#             batch_texts,
+#             padding=True,
+#             truncation=True,
+#             max_length=128,
+#             return_tensors="pt"
+#             )
+
+#         inputs = {key: value.to(device) for key, value in inputs.items()}
+
+#         outputs = model(**inputs)
+#         logits = outputs.logits
+
+#         probs = torch.softmax(logits, dim=1)
+#         preds = torch.argmax(probs, dim=1)
+
+#         predictions.extend(preds.cpu().tolist())
+#         probabilities.extend(probs[:, 1].cpu().tolist())
+
+#     # -----------------------------
+#     # Save output CSV
+#     # -----------------------------
+#     # df["label"] = predictions
+
+#     # saved_csv = testNum + "-pred.csv"
+#     # df.to_csv(saved_csv, index=False)
+#     output_df = pd.DataFrame({
+#         "row_id": df["row_id"],   # make sure this column exists
+#         "prediction": predictions
+#     })
+
+#     saved_csv = testNum + "-pred.csv"
+#     output_df.to_csv(saved_csv, index=False)
+#     print("Saved predictions to ", saved_csv)
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # for test, testNum in test_list:
 

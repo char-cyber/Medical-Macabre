@@ -20,7 +20,11 @@ from transformers import (
 print("Starting training...")
 
 # LOAD DATA -----------------------------------------------------------------------------------------
-df = pd.read_csv("final_sentence_dataset.csv")
+df = pd.read_csv("training_bert.csv")  
+
+# shuffle whole dataset 
+df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+
 df = df.dropna(subset=["text", "label"])
 df["text"] = df["text"].astype(str)
 df["label"] = df["label"].astype(int)
@@ -53,6 +57,7 @@ val_df, test_df = train_test_split(
 train_ds = Dataset.from_pandas(train_df)
 val_ds = Dataset.from_pandas(val_df)
 test_ds = Dataset.from_pandas(test_df)
+
 
 # LOAD CLINICAL BERT  -----------------------------------------------------------------------------------------
 model_name = "emilyalsentzer/Bio_ClinicalBERT"
@@ -155,7 +160,7 @@ training_args = TrainingArguments(
 
     logging_dir="./logs",
     report_to="none",           # prevents wandb/tensorboard issues
-    disable_tqdm=False          # keeps progress bar visible
+    disable_tqdm=True          # turns off progress bar visible
 )
 
 trainer = Trainer(
