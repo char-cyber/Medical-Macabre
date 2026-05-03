@@ -9,7 +9,7 @@ try:
     nltk.download('punkt_tab')
 except:
     pass
-from words import *
+from wok import *
 useful_patterns = [
     # Explicit diagnoses
     r'diagnosed with', r'dx of', r'admitted for', r'treatment for',
@@ -23,7 +23,7 @@ symptom_patterns = [
     r'complains of', r'presented with', r'c/o', r'reports',
     r'endorses', r'experiencing', r'symptoms include',
     r'fever', r'pain', r'shortness of breath', r'nausea',
-    r'vomiting', r'diarrhea', r'cough', r'fatigue', r'bleeding'
+    r'vomiting', r'diarrhea', r'cough', r'fatigue', r'bleeding', r'apnea', r'illness', r'disease'
 ]
 procedure_patterns = [
     r'underwent', r'performed', r'procedure', r'surgery',
@@ -53,7 +53,7 @@ not_useful_patterns = [
     
     # Negative/rule-out (unless specifying what was ruled out)
     r'no acute', r'no evidence', r'negative for', r'maintain', r'remain'
-    r'denies', r'without', r'excluding', r'non', r'no', r'unremarkable', r'unclear', r'unknown', r'unchanged'
+    r'denies', r'without', r'excluding', r'non', r'no', r'unremarkable', r'unclear', r'unknown', r'unchanged',r'not consistent'
     
     # Demographic
     r'year old', r'male|female', r'presenting for', r'lives', r'resides', r'home'
