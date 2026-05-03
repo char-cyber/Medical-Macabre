@@ -54,7 +54,7 @@
 52,30 AM Infusions: Other ICU medications,1
 53,Pantoprazole (Protonix) - [**2129-1-14**] 08: 33 PM Furosemide (Lasix) - [**2129-1-14**] 08,1
 54,33 PM Other medications: Changes to medical and family history,1
-55,Review of systems is unchanged from admission except as noted below Review of systems,1
+55,Review of systems is unchanged from admission except as noted below Review of systems,0
 56,Flowsheet Data as of [**2129-1-15**] 06: 42 AM Vital signs Hemodynamic monitoring Fluid balance 24 hours Since 12 AM Tmax,1
 57,38.6 C (101.4 Tcurrent: 37.1 C (98.8 HR,1
 58,69 (69 - 140) bpm BP: 93/56(65) {84/38(49) - 115/71(79)} mmHg RR,1
@@ -412,7 +412,7 @@
 419,FINDINGS: No focal opacity to suggest pneumonia is seen.,0
 420,No pneumothorax is present.,0
 421,There may be trace effusions bilaterally and there is slight volume overload.,0
-422,The cardiomediastinal silhouette appears unchanged with mitral annular calcifications.,1
+422,The cardiomediastinal silhouette appears unchanged with mitral annular calcifications.,0
 423,[**2171-8-1**] 9: 01 PM CHEST (PA & LAT) Clip # [**Clip Number (Radiology) 73749**] Reason,0
 424,"eval acute process, fluid [**Hospital 3**] MEDICAL CONDITION",1
 425,"80 year old woman with crackles, recent elevation BNP, resistant UTI REASON FOR THIS EXAMINATION",1
@@ -487,8 +487,8 @@
 495,FINDINGS: There continues to be focal enhancement and enlargement of the proximal infundibulum.,0
 496,Other sites of enhancement previously identified in the intracranial space are no longer evident.,0
 497,No new abnormal enhancement is seen.,0
-498,Pattern of T2 signal hyperintensities in the periventricular and subcortical white matter of the cerebral hemispheres is unchanged.,1
-499,Overall morphology of the brain is unchanged since the previous examinations.,1
+498,Pattern of T2 signal hyperintensities in the periventricular and subcortical white matter of the cerebral hemispheres is unchanged.,0
+499,Overall morphology of the brain is unchanged since the previous examinations.,0
 500,There is a small of mucosal thickening in the left maxillary sinus.,1
 501,The mastoid air cells are clear.,0
 502,Flow voids are identified in the major branches of the circle of [**Location (un) **].,1
@@ -520,7 +520,7 @@
 528,Focal linear hyperdensity (2: 19) is consistent with a small amount of resolving blood products.,1
 529,"Hypoattenuating infiltrative process, centered in the right frontal lobe, and crossing the midline at the rostrum of the corpus callosum and extending into the left frontal lobe is is more conspicuous in comparison to the most recent MR, and likely represents progressive infiltrative mass and tumoral edema.",1
 530,"Mass effect on the right lateral ventricle, with near-obliteration of its frontal [**Doctor Last Name 503**] is similar to perhaps slightly increased.",1
-531,8 mm leftward shift of normally-midline structures is unchanged.,1
+531,8 mm leftward shift of normally-midline structures is unchanged.,0
 532,"The appearance of the basal cisterns is unchanged, with no evident downward transtentorial or tonsillar herniation.",0
 533,The visualized paranasal sinuses and mastoid air cells are normally-pneumatized and -aerated.,0
 534,IMPRESSION: 1.,0
