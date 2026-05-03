@@ -17,10 +17,13 @@ from transformers import (
     TrainerCallback
 )
 
+print("CUDA available:", torch.cuda.is_available())
+print("GPU:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "No GPU")
 print("Starting training...")
 
 # LOAD DATA -----------------------------------------------------------------------------------------
-df = pd.read_csv("training_bert.csv")  
+file_name = "combined_labeled_data1.csv"
+df = pd.read_csv(file_name)  
 
 # shuffle whole dataset 
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
@@ -31,12 +34,21 @@ df["label"] = df["label"].astype(int)
 
 
 # PRE-PROCESSING -----------------------------------------------------------------------------------------
+# def clean_text(text):
+#     text = text.lower()
+#     text = text.strip()
+#     text = " ".join(text.split())
+#     return text
+
+import re
 def clean_text(text):
     text = text.lower()
-    text = text.strip()
-    text = " ".join(text.split())
-    return text
-
+    # replace newlines/tabs with space
+    text = re.sub(r"[\n\r\t]+", " ", text)
+    # remove extra spaces
+    text = re.sub(r"\s+", " ", text)
+    
+    return text.strip()
 df["text"] = df["text"].apply(clean_text)
 
 # TRAIN/val/test_split -----------------------------------------------------------------------------------------
@@ -60,9 +72,12 @@ test_ds = Dataset.from_pandas(test_df)
 
 
 # LOAD CLINICAL BERT  -----------------------------------------------------------------------------------------
-model_name = "emilyalsentzer/Bio_ClinicalBERT"
+# model_name = "emilyalsentzer/Bio_ClinicalBERT"
+model_name = "/scratch/user/kiana.shen22/Bio_ClinicalBERT"
 
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+# tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
+
 
 def tokenize(batch):
     return tokenizer(
@@ -89,8 +104,14 @@ test_ds.set_format("torch", columns=["input_ids", "attention_mask", "labels"])
 # LOAD CLINICAL BERT CLASSIFIER  -----------------------------------------------------------------------------------------
 model = AutoModelForSequenceClassification.from_pretrained(
     model_name,
-    num_labels=2
+    num_labels=2,
+    local_files_only=True
 )
+
+# model = AutoModelForSequenceClassification.from_pretrained(
+#     model_name,
+#     num_labels=2
+# )
 
 
 # METRICS  -----------------------------------------------------------------------------------------
@@ -141,8 +162,30 @@ class PrettyMetricsCallback(TrainerCallback):
         )
 
 # TRAINING SETUP  -----------------------------------------------------------------------------------------
+
+# training_args = TrainingArguments(
+#     output_dir="./clinicalbert_results",
+
+#     eval_strategy="epoch",
+#     save_strategy="epoch",
+#     logging_strategy="epoch",   # prints training loss once per epoch
+
+#     learning_rate=2e-5,                 #hypeparams
+#     per_device_train_batch_size=16,
+#     per_device_eval_batch_size=16,
+#     num_train_epochs=10,
+#     weight_decay=0.01,
+
+#     load_best_model_at_end=True,
+#     metric_for_best_model="f1",
+#     greater_is_better=True,
+
+#     logging_dir="./logs",
+#     report_to="none",           # prevents wandb/tensorboard issues
+#     disable_tqdm=True          # turns off progress bar visible
+# )
 training_args = TrainingArguments(
-    output_dir="./clinicalbert_results",
+    output_dir="/scratch/user/kiana.shen22/clinicalbert_results",
 
     eval_strategy="epoch",
     save_strategy="epoch",
@@ -158,7 +201,7 @@ training_args = TrainingArguments(
     metric_for_best_model="f1",
     greater_is_better=True,
 
-    logging_dir="./logs",
+    logging_dir="/scratch/user/kiana.shen22/logs",
     report_to="none",           # prevents wandb/tensorboard issues
     disable_tqdm=True          # turns off progress bar visible
 )
@@ -186,5 +229,8 @@ results = trainer.evaluate(test_ds)
 print(results)
 
 # SAVE MODEL  -----------------------------------------------------------------------------------------
-trainer.save_model("./clinicalbert_icd_classifier")
-tokenizer.save_pretrained("./clinicalbert_icd_classifier")
+# trainer.save_model("./clinicalbert_icd_classifier")
+# tokenizer.save_pretrained("./clinicalbert_icd_classifier")
+
+trainer.save_model("/scratch/user/kiana.shen22/clinicalbert_icd_classifier")
+tokenizer.save_pretrained("/scratch/user/kiana.shen22/clinicalbert_icd_classifier")

@@ -61,6 +61,43 @@ def remove_section_headers(txt):
         pattern = re.compile(r'\b' + re.escape(h) + r'\s*:?\s*\n?', re.IGNORECASE)
         txt = pattern.sub('', txt)
     return txt.strip()
+
+def is_likely_header(text):
+    text_stripped = text.strip()
+    if not text_stripped:
+        return True
+    common_header_words = ['history', 'diagnosis', 'condition', 'exam', 'medication', 'allergy', 'complaint', 'instruction', 'summary', 'assessment']
+    if len(text_stripped) < 30 and text_stripped[0].isupper():
+        if any(word in text_stripped.lower() for word in common_header_words):
+            return True
+    return False
+    
+def split_by_colons(text):
+    if text.count(":")==0:
+        return [text.strip()]
+    #check if text ends with colon (its a header, not pair)
+    if text.strip().endswith(":"):
+        return [text]
+    results = []
+    pts = [p.strip() for p in text.split(":")]
+    i = 1
+    while i< len(pts)-1:
+        first = pts[i]
+        second = pts[i+1]
+        if not second.endswith(":"):
+            paired = f"{first} : {second}"
+            results.append(paired)
+        else:
+            #add both individually
+            results.append(first)
+            results.append(second)
+        i+=2
+    #what about last value? #add individually 
+    if results:
+        return results
+    else:
+        return text
+        
 def get_valid_sentences(df_subset, label):
     valid = []
     for text in df_subset['text'].dropna():
@@ -79,7 +116,7 @@ def get_valid_sentences(df_subset, label):
                 continue
             clean_text = str(sic).replace('\n', ' ')
             val = remove_section_headers(clean_text)
-            sentences = sent_tokenize(val)
+            sentences = sent_tokenize(val) #try fallback to simple splitting
             #split up discharge sections anyw
             for s in sentences:
                 #placeholders = {}
@@ -102,17 +139,9 @@ def get_valid_sentences(df_subset, label):
                 if not hyphen:
                     inter.append(s) #get the whole sentence
                 for pi in inter:
-                    if pi.count(":")>1:
-                        pts = [p.strip() for p in pi.split(":")]
-                        pts = [word for word in pts if word not in section_headers]
-                        for i in range(1, len(pts),2):
-                            arr = pts[i-1]+" : "+pts[i]
-                            arr = re.sub(r'\s+', ' ', arr)
-                            valid.append({'text': arr, 'label': label})
-                    else:
-                        if len(pi)>5:
-                            pi = re.sub(r'\s+', ' ', pi.strip())
-                            valid.append({'text': pi, 'label': label})
+                    values = split_by_colons(pi)
+                    for v in values:
+                        valid.append({'text': v, 'label': label})
     return valid
 pos_data = get_valid_sentences(yeses, 1)
 neg_data = get_valid_sentences(nos, 0)

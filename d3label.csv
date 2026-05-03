@@ -1,0 +1,339 @@
+row_id,text,label
+0,Admission Date:  [**2141-4-12**]              Discharge Date:   [**2141-4-16**],0
+1,Date of Birth:  [**2074-3-26**]             Sex:   F,0
+2,Service: MEDICINE,0
+3,Allergies: Patient recorded as having No Known Allergies to Drugs,0
+4,"Attending:[**First Name3 (LF) 613**] Chief Complaint: s/p fall, s/p L3 laminectomy/discectomy",1
+5,Major Surgical or Invasive Procedure: L3 laminectomy/discectomy,0
+6,"History of Present Illness: Ms. [**Known lastname 62201**] is a 67 year-old woman with Diabetes mellitus, end stage renal disease on hemodialysis, morbid obesity, coronary artery disease, and known L4-5 disc herniation who presented with right leg weakness, increased back pain, and worsening disc protrusion at L3-4.",1
+7,"Immediately after a fall at [**Hospital **] rehab one day prior to admission here, patient experienced increased back pain with radiation down her leg and more difficulty moving her right leg.",1
+8,. Evaluation at [**Hospital6 2561**] included an MRI which showed worsening L3-4 disc protrusion.,1
+9,She also demonstrated some myoclonus/asterixis on exam and received some iv ativan (amount unclear).,0
+10,She was then transferred here for emergent neurosurgical evaluation.,0
+11,. Exam in the ED here notable for decreased rectal tone and decreased sensation in the medial thigh.,1
+12,"She had leg weakness more prominent on the right side, some decreased sensation on right leg in an L3-4 distribution, and absent DTRs in the RLE.",1
+13,"MRI revealed 1)Epidural hematoma extending from L2-L3 level to L4-L5 level resulting in marked mass effect on the thecal sac and as a result, compression of the nerve roots.",1
+14,2) Moderate disc bulge at L4-L5 resulting in moderate stenosis of the spinal canal at that level.,1
+15,3) Small disc herniation at L5-S1 level does not appear to cause significant spinal stenosis.,1
+16,There are bilateral facet degenerative changes at these levels which resulted in severe left sided neural foraminal narrowing.,1
+17,Pt underwent emergent L3 laminectomy/discectomy [**4-12**] given concern for cauda equina syndrome.,1
+18,She remained intubated and was monitored overnight in the ICU.,0
+19,"After dialysis removing 2L followed by successful extubation to CPAP with weaning to nasal cannula oxygen supplementation, pt was transferred to the medicine service in stable condition.",0
+20,"Past Medical History: -Diabetes mellitus x 40 years -ESRD on HD w/RUE AV fistula, followed by Dr. [**Last Name (STitle) **] [**Name (STitle) 29966**] s/p MI in [**2131**] (had chest pain with her MI) -CHF -Hypothyroidism -Glaucoma -Hypertension -Anemia - baseline HCT 27-32 -Cataracts -Fractured wrist in her 20s -Morbid obesity",1
+21,"Social History: -Retired, used to work in electronics -Had lived with sister but most recently has been at [**Name (NI) **] rehab -No recent alcohol or tobacco use -PCP [**Last Name (NamePattern4) **].",0
+22,[**Last Name (STitle) **],0
+23,Family History: -Brother with diabetes -Brother with [**Name2 (NI) 499**] ca -Sister with breast cancer,0
+24,Physical Exam: Vitals: 97.1 75 137/58 18 99% 3L NC 1047/1826 24H [**Telephone/Fax (1) 62202**] today,0
+25,"Tele: NSR, occas PVCs General: Morbidly obese, lying in bed, NAD Neck: Obsese Lungs: CTA bl anteriorly CV: RRR, no murmur Abdomen: Soft, Non-tender Ext: 1+edema Neurologic Examination: AOx3, MAEW, RLE weakness, no focal loss sensation",0
+26,Pertinent Results: [**2141-4-13**] Admission Labs: WBC-22.6* RBC-2.99* Hgb-9.5* Hct-27.9* MCV-93 MCH-31.8 MCHC-34.1 RDW-14.1 Plt Ct-195 PT-13.4 PTT-23.8 INR(PT)-1.1 Glucose-161* UreaN-42* Creat-6.8*# Na-142 K-4.9 Cl-103 HCO3-23 AnGap-21* [**2141-4-12**]: ALT-28 AST-95* AlkPhos-36* TotBili-0.3 .,1
+27,"MR [**Name13 (STitle) 6452**] W & W/O CONTRAST  [**2141-4-12**] 1) Epidural hematoma extending from L2-L3 level to L4-L5 level resulting in marked mass effect on the thecal sac and as a result, compression of the nerve roots.",1
+31,"Brief Hospital Course: A/P: 67 year-old woman POD 1 s/p L3-5 laminectomy/discectomy for above worsening lumbar disease s/p fall; extubated, s/p dialysis and breathing comfortably on oxygen supplementation per nasal cannula.",1
+32,s/p L3 Laminectomy/Discectomy and Hematoma Evacuation s/p Fall:,0
+33,"Stable, now off steroids.",0
+34,"Very deconditioned, needs aggressive PT.",0
+35,Pt wished to return to [**Hospital1 **].,0
+36,Pain mgmt with percocet and IV morphine PRN.,0
+37,"Leukocytosis: Afebrile, no signs/sx infection.",0
+38,"Likely [**1-18**] steroids, which have been discontinued.",0
+39,DM: stable .,0
+40,ESRD on HD qMWF: stable .,0
+41,CAD s/p MI:  stable .,0
+42,CHF: EF unknown (? records).,0
+43,Now well-compensated.,0
+44,[**Female First Name (un) 564**]: nystatin w/dry gauze drsg [**Name5 (PTitle) **] [**Name5 (PTitle) 62203**]; aloe [**Doctor First Name **] 2 in 1 ointment around open areas . Hypothyroidism: stable on levothyroxine . Glaucoma: timolol gtt,0
+45,Comm: Daughter [**First Name4 (NamePattern1) 2270**] [**Last Name (NamePattern1) **] [**Telephone/Fax (1) 62204**] Cell [**Telephone/Fax (1) 62205**].,0
+46,Lives with sister [**Name (NI) **] [**Telephone/Fax (1) 62206**].,0
+47,Medications on Admission: Medications: -Glipizide 5mg PO once daily -Lopressor 50mg PO BID -Levothyroxine 25mcg PO daily -Timolol eye gtt OU [**Hospital1 **] -Nephrocaps . Meds added on at rehab -PhosLo -Colace -Dulcolax -Heparin sc -Tylenol -Naprosyn -Oxycodone -Sliding scale insulin,0
+48,Discharge Disposition: Extended Care,1
+49,Facility: [**Hospital3 7**] & Rehab Center - [**Hospital1 8**],0
+50,"Discharge Diagnosis: lumbar hematoma s/p fall Diabetes mellitus x 40 years ESRD on hemodialysis Anemia of chronic disease s/p fall, s/p L3 laminectomy and discectomy [**Female First Name (un) 564**] albicans skin infection Secondary: CAD s/p MI in [**2131**] CHF Hypothyroidism Glaucoma Hypertension Cataracts Fractured wrist in her 20s Morbid obesity",1
+51,"Discharge Condition: hemodynamically stable, tolerating oral diet, breathing comfortably on room air",0
+52,Discharge Instructions: Please take medications as prescribed.,0
+53,"Call your doctor or go to the ED if you have increased leg weakness, back pain, bowel or bladder incontinence, shortness of breath, or rapid weight gain.",0
+54,Your surgical staples should be removed in 2 weeks on [**2141-4-27**].,0
+55,Please continue your previous medications.,0
+56,"Additionally, take a daily aspirin as prescribed to help protect from worsening heart disease or stroke.",0
+57,Followup Instructions: Please follow up with your regular doctor.,0
+58,Please call Dr. [**Last Name (STitle) **] at ([**Telephone/Fax (1) 62207**] to make an appointment.,0
+59,"Please follow up in the neurosurgery clinic with Dr. [**Last Name (STitle) **] on Wednesday, [**6-1**] at 1:45pm.",0
+60,Phone ([**Telephone/Fax (1) 11314**] with any questions.,0
+61,[**First Name5 (NamePattern1) **] [**Last Name (NamePattern1) **] MD [**MD Number(2) 617**],0
+62,Completed by:[**2141-4-16**],0
+63,"[**2197-6-8**] 5:42 AM  CHEST (PORTABLE AP)                                             Clip # [**Clip Number (Radiology) 69075**]  Reason: interval evaluation  Admitting Diagnosis: ? BRONCHOPLEURAL FISTULA  
+                                  FINAL ADDENDUM  Findings were discussed with Dr. [**First Name (STitle) 3229**] at the time of the interpretation of  this study.",1
+64,"[**2197-6-8**] 5:42 AM  CHEST (PORTABLE AP)                                             Clip # [**Clip Number (Radiology) 69075**]  Reason: interval evaluation  Admitting Diagnosis: ? BRONCHOPLEURAL FISTULA  
+  [**Hospital 2**] MEDICAL CONDITION:   89 year old woman s/p R VATS and blectomy for persistent air leak  REASON FOR THIS EXAMINATION:   interval evaluation  
+                                  FINAL REPORT  REASON FOR EXAM:  S/P right VATS.",1
+65,Persistent air leak.,1
+66,Comparison is made with prior studies performed 6 hours earlier.,0
+67,Moderate to large right pneumothorax has increased.,1
+68,ET tube tip is in  standard position.,0
+69,Increased right lung collapse.,1
+70,Mediastinal structures are  midline.,0
+71,NG tube tip is in the stomach.,0
+72,There is mild to moderate left  pleural effusion is unchanged.,0
+73,There has been increase in right subcutaneous  emphysema.,1
+74,Right chest tubes remain in place.,0
+75,Unchanged scoliosis.,0
+76,"[**2163-11-6**] 1:29 PM  CHEST PORT. LINE PLACEMENT; -76 BY SAME PHYSICIAN               [**Name Initial (PRE) 26**] # [**Clip Number (Radiology) 108139**]  Reason: eval for line placement  Admitting Diagnosis: BACTEREMIA  
+  [**Hospital 2**] MEDICAL CONDITION:   84 year old man with new R subclavian  REASON FOR THIS EXAMINATION:   eval for line placement  
+                                  FINAL REPORT  AP CHEST 1:43 P.M. ON [**11-6**].",1
+77,HISTORY:  New right subclavian line.,0
+78,IMPRESSION:  AP chest compared to [**10-18**] through [**11-6**] at 10:45  a.m.:,0
+79,Tip of the new right subclavian line ends low in the SVC.,0
+80,There is no change  in the small-to-moderate right pleural effusion and no pneumothorax or  mediastinal widening to suggest complications of line insertion.,0
+81,Severe  cardiomegaly is longstanding.,1
+82,Pulmonary vascular engorgement and bibasilar  atelectasis are unchanged.,0
+83,Tracheostomy tube is midline.,0
+84,"Transvenous right  atrial and right ventricular pacer defibrillator leads are in their expected  locations, unchanged.",0
+85,No pneumothorax.,0
+86,"[**Last Name (LF) **],[**First Name3 (LF) **] K.                ORTHO CC6A                 [**2169-4-10**]  7:46 PM  CT HEAD W/O CONTRAST                                            Clip # [**Clip Number (Radiology) 86769**]  Reason: MS CHANGES.",1
+87,"Admitting Diagnosis: LEG FRACTURE  
+  [**Hospital 2**] MEDICAL CONDITION:   47 year old man s/p motorcycle collision with complex segmental left tibial   fractures s/p multiple left lower extremity surgeries with mental status   changes, febrile to 102 and tachycardic to 140's  REASON FOR THIS EXAMINATION:   eval for interval changes  No contraindications for IV contrast  
+                                   PFI REPORT  PFI:  No interval change compared to [**2169-4-6**].",1
+88,No acute intracranial  process.,0
+89,Atrial fibrillation (Afib)    Assessment:    Dilt gtt running at 15mg/hr.,1
+90,HR remains AF 80-110 s with rare bursts    to 130s.,1
+91,Action:    Dilt increased from 5-> 15mg/hr this AM.,1
+92,TTE done to r/o PFO/clot.    Response:    HR decreased to 80s-110s on increased Dilt.,1
+93,AF remains moderately    controlled.,1
+94,Plan:    Awaiting read from echo. ?Start Amio vs continued dilt for better rate    control.,0
+95,"Valve replacement,  MV replacement w/[**First Name8 (NamePattern2) **] [**Male First Name (un) 640**] Tissue Valve and #30    Tricuspid Valve ring    Assessment:           Neuro: AOx3, lethargic, weak, MAE, follows commands    consistently           CV:  AV paced at 90 with underlying junctional rhythm, rare    4-6 beats runs of VT, no other ectopy, SBP> 90 on Levo, CT to suction    with minimal serosanginous drainage, no air leak, weak but palpable    pulses           Resp:  LSCTA, C&R yellow/tanish sputum           GI:  Patent foley, draining concentrated urine adequate HUO           GU:  + BS, -Flatus, taking PO s without difficulty           Endo:  BS WNL           Pain: uncomfortable , with only [**2156-12-18**] pain    Action:           CV:  AV paced to help with BP support, titrated Levo to    maintain SBP>90 and MAP>60, 1 unit PRBC given for HCT 22.5, monitored    lytes and repleted PRN (Mag, Ca and K repleted), monitored ABG           Pain:  1 percocet given for pain    Response:           CV:  Able to decrease Levo dose but remains on minimal for    BP support           Pain:  Patient resting comfortably, reporting no pain    Plan:    Continue to monitor, ween Levo as tolerated, monitor HCT",1
+96,Neonatology,0
+97,"Warm, erythematous, indurated area noted over right posterior leg with puncture site at base.",1
+98,Not clearly tender.,0
+99,"Area of involvement does not include ankle or knee, both of which are non-tender and have full passive/active range of movement.",0
+100,Has just completed 7-day course of vancomycin and gentamicin.,0
+101,Colonized with MRSA.,1
+102,Will restart vancomycin and add meropenem at suggestion of ID.  Film obtained.,0
+103,Will obtain ultrasound in morning.,0
+104,Respiratory Care Note Pt. continues on 1.0 lpm HFNC at 100%.,0
+105,BS clear.  On Lasix.,0
+106,To follow.,0
+107,Nursing Progress Note 0700-1900 *Full Code,0
+108,"*Allergies: Ceclor, PCN, Quinine",0
+109,"*Access:  RSC TLC, Rrad A-line, L hand 20g PIV (PICC requested to be placed prior to OR tomorrow but not to be used in OR, TLC to stay for now and then removed and tip cx'd after OR)",0
+110,** Please see admit note/FHP for admit info and hx.,0
+111,"Neuro: Mildly sedated on 30mcg/kg/min, frequent changes trying to get pt comfortable but not overly sedated.  @ times difficult to arouse and does not follow commands, other times follows commands, opens eyes but appears uncomfortable in bed and on vent (vent changes for comfort as well).",1
+112,"No indications on pain, non-verbal and vitals.",0
+113,"Ativan 2mg PRN x1 for agitation (increased vitals), standing lexapro (anxiety).",1
+114,"Cardiac:  NSR w/o ectopy, HR 79-99, SBP 112-176, A-line MAP 65-108, goal A-line MAP < 100, following NBP for consistancy (A-line w/ ""whip"" @ times so SBP 30-40mmHG higer than NBP).",1
+115,"Metoprolol held this AM for SBP (NBP) under 110, but given this afternoon (may need to change to PRN).",1
+116,"hct stable @ 31.1, K repleted this AM and labs this afternoon showed K 3.8, repleted w/ 40mEq KCL PO.",1
+117,"Resp:  Started shift on CPAP 17/10peep, 30%, decreased to [**10-24**] to increase rate and minute volume.",1
+118,"Later abd breathing and tachypnic, hypertensive, tachycardic, so increase Psup back up to 15, tolerating @ this time.",1
+119,"PEEP to stay @ 10, no need to attempt further weaning until after surgery.",0
+120,"This shift, o2sat 96-100, rr 16-26, LS mostly clear upper/rhonchi lower, sxn Q4H for mod white/thick secretions, RSBI this AM was 120.  Plan for rigid bronch w/ Y-stent placement in OR @ 1300.",1
+121,Gi/Gu:  NPO @ mn for procedure tomorrow.,0
+122,"Maintenance fluid D5 1/2NS @75cc/hr. +BS, stool x2 brown/loose/formed, guiac neg, abd soft non/tender.",1
+123,"Urine out foley yellow/clear, 20-555cc/hr (auto diuresis @ times, neg for 24H @ this time).",1
+124,"FSBG 148, no coverage per RISS.",1
+125,"ID:  Temp 97.8-98.4axillary, WBC 6.3.  ABX dc'd today d/t no finding of infection from pan cx 2 days ago, no signs of PNA per CXR, awaiting TLC removal for tip cx after OR tomorrow.  Skin intact, IV sites wnl, ecchymosis lower abd through to perineal area, not firm, no known cause @ this time.",0
+126,"Psychosocial:  husband and daughter visited today, updated on [**Name (NI) 261**] and condition.",0
+127,Pt aroused enough to nod and attempt to mouth words to fam members.,0
+128,"Acknowledged they were there and smiled @ their jokes, able to interact for short time.",0
+129,"Dispo:  monitor resp status, BP and anxiety (treat w/ sxn, vent changes if needed, metoprolol, increase propofol, and/or Ativan 2mg PRN IV).",1
+130,"Awaiting OR tomorrow @ 1300 for rigid bronch w/ y-stent placement, will return to MICU following.",0
+131,cont med regimen and icu care @ this time.,0
+132,NPN 0700-1900,1
+133,"RESP:  Infant currently remains on CPAP 5, FiO2 21%.  Will trial off CPAP later this afternoon.  RR 40s-70.",1
+134,LS cl/=. Mild IC/SC retractions.,1
+135,No A's or B's this shift.,0
+136,On caffeine.,0
+137,P: Cont to support & monitor resp status.,0
+138,BILI:  Infant placed under neoblue bank at 1230 for bili this am of 5.2/0.3 (up from 3.5/0.2).,1
+139,Eye shields in place.,0
+140,Plan to check bili Sat am.,1
+141,P: Cont with phototherapy.,1
+142,FEN:  BW 1165g.  CW 1050g (down 60g).,1
+143,TF increased today to 120cc/kg/day.  IVF at 110cc/kg/day of PND7.5 infusing via primary & secondary ports of DLUVC.,1
+144,Enteral feeds started today at 10cc/kg/day of SC20.,1
+145,DS 89.  Abd exam benign; no spits thus far.  AG 21cm.,0
+146,"Voiding, u/o = 3.9cc/kg/hr thus far.  No stool.",0
+147,Plan to check lytes & tryglycerides with bili on Sat am.,1
+148,P: Cont to support nutritonal needs.,0
+149,"G/D:  Temps stable, nested in servo isolette with boundaries in place.",1
+150,Infant is a&a with cares & settles well in between cares.  Irritable at times.,0
+151,Appropriately brings hands to face and sucks pacifier to comfort self.  AFSF.,0
+152,AGA.  Plan for HUS Monday.  P: Cont to support dev needs.,0
+153,ID:  48hr r/o of ampi & gent complete.,1
+154,CBC benign & blood cx neg to date.,1
+155,No s/sx of infection.,0
+156,Problem resolved.,0
+157,Parents.,0
+158,"Mom & Dad in to visit x1.  Updated on infant's condition and plan of care.  Loving, involved parents.",0
+159,P: Cont to update & support family.,0
+160,"[**Last Name (LF) 3739**],[**First Name3 (LF) **] S.                       OPT FA9A                   [**2182-7-2**]  3:41 PM  CT ABDOMEN W/CONTRAST; CT PELVIS W/CONTRAST                     Clip # [**Clip Number (Radiology) 30272**]  Reason: PO and IV contrast please, please eval for transition point  Admitting Diagnosis: BOWEL OBSTRUCTION  
+  [**Hospital 2**] MEDICAL CONDITION:   75 year old man with abd pain, N/V, SBO on KUB also w/purulent drainage from   abdomen  REASON FOR THIS EXAMINATION:   PO and IV contrast please, please eval for transition point for SBO, fistula vs   sinus track to anterior abdomen  No contraindications for IV contrast  
+                                   PFI REPORT  No evidence for small bowel obstruction.",0
+161,No fluid collection or fistula.,0
+162,Increase in size of left renal mass concerning for renal cell carcinoma.,1
+163,Sinus rhythm with marked lateral repolarization abnormalities.,1
+164,Compared to the previous tracing there is no diagnostic change.,0
+165,TRACING #2,0
+166,Progress Note:    This worker again met with Mr. [**Name13 (STitle) 7006**] re his concerns about his wife    and her TX.,0
+167,"He said that he had spoken with Dr. [**Last Name (STitle) 7102**] about having his    wife transferred to B&W. He was told that they do not currently have a    bed and that if they did accept her in transfer, there would be a    condition that if her progress did not improve over a matter of days    that they would trach her.",0
+168,This writer explained that if his wife were    to remain in the [**Name (NI) 4**] that they too might have to trach her.,0
+169,Mr. [**Name13 (STitle) 7006**]    again raised the issue of his wife s anti-seizure medication not being    at therapeutic level.,0
+170,"In response, this worker addressed with him the    understanding that he had decided to move on from that issue as    discussed on Friday with the focus being on how to support him having    faith in the TX the healthcare team is providing his wife in the [**Name (NI) 4**].",0
+171,Mr. [**Name13 (STitle) 7006**] said that he was trying to get family members to come to a    meeting tomorrow afternoon to discuss the TX status and for them to    make a decision re transferring Ms. [**Known lastname 6896**] to B&W. This worker relayed    to him having seen his wife panic earlier in the morning when the RT    had reduced the venting and then immediately resumed it at its previous    setting because of her difficulty.,0
+172,"Periodically when talking, Mr.    [**Name13 (STitle) 7006**] would ask his wife if she wanted the tube removed, with her    sometimes shaking her head positively and then negatively.    Assessment: It was this worker s impression that the way he was    phrasing and asking the question of her implied that she did want it    removed.",0
+173,His frequently questioning her seemed to be causing her    increased agitation.,0
+174,This worker explained to him that she could not    probably understand all of the ramifications associated with the    questions that he was asking.,0
+175,"At one point, Mr. [**Name13 (STitle) 7006**] took hold of the    tube and asked his wife, in what this writer experienced as his being    provocative,",0
+176,did she want him to remove it.,0
+177,"In response to this worker    said to him Please not do that,  he stopped.",0
+178,"[**2204-6-11**] 2:04 PM  CTA HEAD W&W/O C & RECONS                                       Clip # [**Clip Number (Radiology) 32876**]  Reason: degree of stenosis  Admitting Diagnosis: STROKE;TELEMETRY   Contrast: VISAPAQUE Amt:  
+  [**Hospital 4**] MEDICAL CONDITION:   53 year old man with basilar stenosis  REASON FOR THIS EXAMINATION:   degree of stenosis  No contraindications for IV contrast  
+                                  FINAL REPORT  INDICATION:  Basilar stenosis.",1
+179,"COMPARISON:  Head CTA dated [**2204-3-20**], head MRI dated [**2204-3-19**], and conventional cerebral angiogram dated [**2204-3-21**].",0
+180,"TECHNIQUE:  Following a non-contrast head CT, axial multidetector CT images of  the head were obtained during intravenous contrast administration, according  to CTA protocol.",0
+181,Multiplanar two-dimensional reformatted images and volume-  rendered three-dimensional reformatted images were generated.,0
+182,NON-CONTRAST HEAD CT:  There is no acute intracranial hemorrhage.,0
+183,"A partially  calcified extra-axial mass is again seen in the left superior frontal region,  without evidence of associated parenchymal edema.",1
+184,"There is a new  subcentimeter hypodensity in the left corona radiata (series 2, image 24),  consistent with lacunar infarction which is new since [**2204-3-4**].",1
+185,"Mild  prominence of the ventricles and sulci is unchanged, consistent with mild  cerebral atrophy.",0
+186,The imaged bones are unremarkable.,0
+187,There is a mucus retention cyst in the  left maxillary sinus.,1
+188,HEAD CTA.,0
+189,"There is no change in the appearance of the intracranial internal  carotid and vertebral arteries, and their major branches.",0
+190,A moderate short-  segment stenosis is again seen in the mid basilar artery.,1
+191,"Short-  segment stenoses are also again seen at the origin of the left anterior  cerebral artery, and in the P1 segments of the posterior cerebral arteries.",0
+192,Stenoses seen at the origin of the right posterior inferior cerebellar artery  and in the right anterior temporal artery on the preceding conventional  angiogram are not well appreciated on this study.,0
+193,There is no evidence of an  aneurysm.,0
+194,IMPRESSION:,0
+195,1.  New lacunar infarction in the left corona radiata since [**2204-3-4**].,1
+196,"2.  Grossly unchanged appearance of the partially calcified left frontal  extra-axial mass, suggestive of a meningioma.",1
+197,"Unchanged appearance of multiple intracranial arterial stenoses, including  the moderate stenosis in the mid basilar artery, most likely related to                                                              (Over)",0
+198,"[**2204-6-11**] 2:04 PM  CTA HEAD W&W/O C & RECONS                                       Clip # [**Clip Number (Radiology) 32876**]  Reason: degree of stenosis  Admitting Diagnosis: STROKE;TELEMETRY   Contrast: VISAPAQUE Amt:  
+                                  FINAL REPORT  (Cont)  atherosclerosis.",1
+199,DFDkq,0
+200,"[**2169-7-6**] 11:18 PM  CHEST (PA & LAT)                                                Clip # [**Clip Number (Radiology) 93131**]  Reason: r/o infiltrate  
+  [**Hospital 4**] MEDICAL CONDITION:   62 year old woman with confusion  REASON FOR THIS EXAMINATION:   r/o infiltrate  
+                                  FINAL REPORT  PA/LATERAL CHEST RADIOGRAPH",1
+201,INDICATION:  62 year old female with confusion.,0
+202,Evaluate for infiltrate.,0
+203,FINDINGS:  There is a hemodialysis catheter in place with its distal tip in  the mid-SVC.,0
+204,The heart is enlarged.,0
+205,The pulmonary vascularity is normal with  no evidence of failure.,0
+206,The mediastinal contours are within normal limits.,0
+207,There is obscuration of the left cardiophrenic angle on the lateral view that  likely represents overlying osseous structures.,0
+208,IMPRESSION:   Cardiomegaly with obscuration of the costophrenic angles on the  lateral view that is likely secondary to overlying osseous structures.,0
+209,Repeat  PA and lateral chest radiograph should be performed if the patient has  clinical symptoms of pneumonia.,0
+210,"[**2142-5-26**] 12:45 PM  MRI PELVIS W/O & W/CONTRAST; MR CONTRAST GADOLIN                Clip # [**Clip Number (Radiology) 40132**]  Reason: hx of metastatic cholangiocarcinoma   Contrast: MAGNEVIST Amt: 22  
+  [**Hospital 3**] MEDICAL CONDITION:   62 year old woman with hx of metastatic cholangiocarcinoma  REASON FOR THIS EXAMINATION:   hx of metastatic cholangiocarcinoma  
+                                  FINAL REPORT  MRI PELVIS:",0
+211,INDICATION:  Patient with pathologic proven history of metastatic  cholangiocarcinoma.,0
+212,For interval evaluation.,0
+213,TECHNIQUE:  Multiplanar T1 and T2-weighted sequences were acquired.,0
+214,"Axial T1-  weighted in and out phase imaging, multiplanar HASTE imaging, high resolution  T2-weighted imaging and  dynamic contrast enhanced imaging before, during and  after the administration of intravenous contrast was performed.",1
+215,MULTIPLANAR REFORMATS.,0
+216,The images were exported to an off line work station  for interactive interrogation and analysis.,0
+217,These images were invaluable in  evaluating the pathology demonstrated.,0
+218,COMPARISON:  Reference is made to examination from [**2141-5-17**].,0
+219,"In  addition, correlation to the patient's clinical notes was performed.",0
+220,"REPORT.  A nephrostomy tube is identified within the left kidney, which  appears a little atrophic.",1
+221,There is now evidence of advanced right-sided  hydronephrosis.,1
+222,The dilated right ureter can be traced down to the right  adnexal region.,1
+223,"There is a multi-cystic lesion identified in the right  adnexal region which measures approximately 3.1 x 2.3 cm, which corresponds  favorably to a previous size of 3 x 2.5 cm.",0
+224,"Similarly, a left adnexal lesion  is now identified measuring 3.5 x 2.8 cm, which has increased in size from  [**2141**] when it measured approximately 3.1 x 1.6 cm.",0
+225,"There is evidence of  heterogenous bone marrow, particularly in the sacral region where there is  extensive fatty replacement.",0
+226,This suggests that there has been radiation to  the pelvis.,0
+227,"In addition, some slightly thickened loops of sigmoid colon are  identified which were not identified previously.",0
+228,A few small lymph nodes are identified scattered throughout the mesentery and  retroperitoneum.,0
+229,These are not pathological by size criteria.,0
+230,"There us  evidence of uterine retroversion, which is appreciated on previous  examination.",1
+231,The uterine stripe has now increased in size and now measures  nearly 9 mm.,0
+232,"On T2-weighted imaging, adnexal lesions now contain multiple  small benign appearing cystic structures, which morphologically resemble  follicular activity within the ovaries.",0
+233,"The combination of increased  endometrial thickness as well as the follicular appearing adnexae raises the  possibility of hormonal stimulation, possibly related to patient's  chemotherapy.",0
+234,"The patient should, however, be evaluated for symptoms of post-  menopausal bleeding.",0
+235,(Over),0
+236,"[**2142-5-26**] 12:45 PM  MRI PELVIS W/O & W/CONTRAST; MR CONTRAST GADOLIN                Clip # [**Clip Number (Radiology) 40132**]  Reason: hx of metastatic cholangiocarcinoma   Contrast: MAGNEVIST Amt: 22  
+                                  FINAL REPORT  (Cont)    Dynamic contrast enhanced imaging of the adnexae now shows no evidence of  enhancement, whereas on examination a year ago, significant enhancement was  appreciated.",0
+237,These suggest that the tumor may no longer be viable.,0
+238,No new masses are seen.,0
+239,CONCLUSION:,0
+240,"When compared to previous examination, the adnexal lesions have not  significantly changed in size, but have changed in character.",1
+241,No appreciable  contrast enhancement is now evident on dynamic contrast enhanced imaging.,0
+242,This  suggests that the lesions may now be sterile.,0
+243,"There is now marked right-sided  hydronephrosis that can be traced down to the right adnexal lesion, but this  may represent fibrosis and cicatrization secondary to radiotherapy.",1
+244,The  pattern of fat distribution within the sacral bones suggests pelvic radiation.,0
+245,"There is now evidence of endometrial thickening as well as apparent follicular  activity within the ovaries, both abnormal for a post-menopausal woman.",0
+246,This  may represent hormonal stimulation secondary to chemotherapy.,0
+247,Right-sided hydronephrosis is present.,1
+248,Consideration to nephrostomy should be  made.,0
+249,KEYWORD: PELVIS,0
+250,"REST MIBI                                                       Clip # [**Clip Number (Radiology) 15552**]  Reason: S/P MYOCARDIAL INFARCTION, PATIENT ENROLLED IN THE COOL-MI STUDY ([**Doctor First Name 7522**] # [**Numeric Identifier 15553**]).",0
+251,"FINAL REPORT  HISTORY:  Forty-five year old with known CAD, s/p MI on [**2147-6-26**].  Follow up scan  as part of the COOL-MI study.",0
+252,"INTERPRETATION:  Following injection of MIBI while patient was at rest, static  and gated SPECT images were obtained and analyzed.",0
+253,A bull's-eye display of  tracer distribution throughout the myocardium was also obtained.,0
+254,Imaging Protocol:  gated SPECT.,0
+255,Images show an enlarged left ventricular cavity.,1
+256,"There is a severe defect  involving the anteroapical wall, as well as a moderate defect involving the  anterior septum.",1
+257,Gated images show hypokinesis of the anteroapical wall.,1
+258,Left ventricular  ejection fraction was calculated to be 41%.,0
+259,IMPRESSION:  Severe defect involving the anterior wall with extension to the  apex.,1
+260,Moderate defect of the anterior septum.,0
+261,Ejection fraction of 41%.,0
+262,"[**First Name8 (NamePattern2) **] [**Last Name (NamePattern1) 5635**], M.D.          [**Last Name (NamePattern5) 476**], M.D.              Approved: WED [**2147-8-2**] 12:18 PM",0
+263,RADLINE [**Telephone/Fax (1) 249**]; A radiology consult service.,0
+264,"To hear preliminary results, prior to transcription, call the                            Radiology Listen Line [**Telephone/Fax (1) 250**].",0
+265,Sinus tachycardia.,1
+266,Low limb lead voltage.,1
+267,Minor ST segment abnormalities.,1
+268,Since the previous tracing of [**2152-10-25**] the rate is faster.,0
+269,Limb lead voltage is lower.  ST-T wave abnormalities persist.,0
+270,TRACING #1,0
+271,"[**2119-9-4**] 10:49 AM  CT CHEST W/CONTRAST; CT 100CC NON IONIC CONTRAST                Clip # [**Clip Number (Radiology) 76799**]  Reason: please assess for interval progression vs resolution of infi  Field of view: 36 Contrast: OPTIRAY Amt: 100  
+  [**Hospital 2**] MEDICAL CONDITION:   51 year old man with hospitalization for episode of sever dyspnea/hypoxemia in   [**1-7**] - path showed pneumonitis c/w aspiration.",0
+272,Also with PEs on that admit.,0
+273,Now clinically improving but still with residual dyspnea.,0
+274,"REASON FOR THIS EXAMINATION:   please assess for interval progression vs resolution of infiltrates seen in   [**1-7**]  
+                                  FINAL REPORT  INDICATION:  51-year-old man with hospitalization for episode of severe  dyspnea but showed pneumonitis with aspiration.",0
+275,"The patient also was admitted  with PEs and now clinically improving, but still has residual dyspnea.",0
+276,CHEST CT WITH CONTRAST,0
+277,MDCT of the chest was performed from the thoracic inlet through the adrenals  with injection of 100 cc of Optiray.,0
+278,COMPARISON:  CTA chest done on [**2119-1-27**].,0
+279,"FINDINGS:  Pulmonary emboli cannot be ruled out on this study, as this study  was not a PE study and has a different phase of contrast.",0
+280,"There are multiple prevascular, pretracheal, hilar and calcified subcarinal  nodes, all of these are unchanged in size compared to the prior CT of [**1-27**], [**2118**].",0
+281,The largest right hilar node measures 14 x 16 mm.,0
+282,There is a small  pericardial effusion.,1
+283,There are no pleural effusions.,0
+284,The lungs show  multiple areas of scarring in both lower lobes and biapical scarring.,1
+285,Surgical  staples are seen in the superior segment of the right lower lobe.,1
+286,"The liver, adrenals and kidneys are unremarkable.",0
+287,The patient is status post  splenectomy.,0
+289,"1.  Pulmonary embolism cannot be excluded on this study, as this is not a  dedicated PE study.",0
+290,"If this diagnosis is suspected clinically, a dedicated PE  study is recommended.",0
+291,"2.  Multiple small mediastinal nodes and right hilar enlarged node, all  unchanged compared to the prior study.",0
+292,Calcified subcarinal and right hilar  adenopathy is also noted.,0
+293,3.  Tiny pericardial effusion.,0
+294,4.  No pulmonary nodules or areas of consolidations.,0
+295,`                                                              (Over),0
+296,"[**2119-9-4**] 10:49 AM  CT CHEST W/CONTRAST; CT 100CC NON IONIC CONTRAST                Clip # [**Clip Number (Radiology) 76799**]  Reason: please assess for interval progression vs resolution of infi  Field of view: 36 Contrast: OPTIRAY Amt: 100  
+                                  FINAL REPORT  (Cont)",0
+297,"[**2149-9-5**] 11:55 AM  CT LOW EXT W/O C RIGHT                                          Clip # [**Clip Number (Radiology) 59027**]  Reason: 59 year old man with hx of AML, neutropenic with some right  
+  [**Hospital 4**] MEDICAL CONDITION:   59 year old man with hx of AML, neutropenic with some right medial swelling.",0
+298,Disruption of posterior cortex of right proximal tibia seen on plain film.,1
+299,R/O   fracture.,1
+300,Please image knee and proximal tibia.,0
+301,"REASON FOR THIS EXAMINATION:   59 year old man with hx of AML, neutropenic with some right medial swelling.",0
+305,"No contraindications for IV contrast  
+                                  FINAL REPORT  INDICATION:  Right medial swelling and possible disruption of the posterior  cortex of the proximal tibia seen on recent radiography.",0
+306,Patient has a  history of AML and neutropenia.,0
+307,"COMPARISON:  [**2149-9-4**], and MRI and radiographs both from [**2149-1-3**].",0
+308,TECHNIQUE:  Axial CT images were acquired through the right knee without  intravenous contrast.,0
+309,Coronal and sagittal reformatted images were also  reviewed.,0
+310,"FINDINGS:  There is no fracture or dislocation.  Note is made of extensive  patchy sclerosis and lucency involving the distal femur, patella and proximal  tibia.",0
+311,"These findings account for the abnormal sclerosis seen on the  comparison radiograph, and were not present on radiograph from [**2148-12-24**].",0
+312,"Anteriorly in the medial femoral condyle is 7 x 5-mm sclerotic focus (7:28),  consistent with a bone island.",0
+313,There is a small fabella.,0
+314,Small enthesophytes are present at the quadriceps  tendon as are small spurs at the superior and inferior pole of the patella.,0
+315,"Finally, note is made of small lateral compartment osteophytes.",0
+316,Soft tissue  structures reveal atherosclerotic vascular calcification.,0
+317,Note is also made  of a small knee joint effusion.,0
+318,IMPRESSION:  1.  No fracture.,0
+319,"2.  Patchy sclerosis and lucency involving the distal femur, proximal tibia  and patella as described above.  These findings likely reflect significant  osteopenia, but given that they are new and asymmetric, would recommend  further characterization of the marrow via MRI.",0
+320,Results and recommendations for followup are entered into the critical results  communication system at 2:31 p.m. on [**2149-9-5**].,0
+322,"[**2149-9-5**] 11:55 AM  CT LOW EXT W/O C RIGHT                                          Clip # [**Clip Number (Radiology) 59027**]  Reason: 59 year old man with hx of AML, neutropenic with some right  
+                                  FINAL REPORT  (Cont)",0
