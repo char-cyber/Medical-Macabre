@@ -60,6 +60,7 @@ train_df['label'] = train_df.apply(
     lambda row: find_label(row['text'],row['label']), 
     axis=1
 )
+train_df['text'] = train_df['text'].str.replace(r'\s+', ' ', regex=True).str.strip()
 train_df = train_df.drop_duplicates(subset=['text'], keep='first')
 train_df.to_csv('d3label.csv')
 
