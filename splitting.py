@@ -22,7 +22,7 @@ def get_valid_sentences(df_subset, label):
                 new_s = str(s).replace('\n', ' ')
                 new_s = re.sub(r'_+', '\n', new_s)
                 new_s = new_s.strip()
-                if len(s)>5:
+                if len(s)>10:
                     valid.append({'text': new_s, 'label': label})
     return valid
 # pos_data = get_valid_sentences(yeses,1)
@@ -39,28 +39,28 @@ def get_valid_sentences(df_subset, label):
 # )
 # train_df = train_df.drop_duplicates(subset=['text'], keep='first')
 # train_df.to_csv('train_labeled.csv')
-if __name__ == "__main__":
-    notes = pd.read_csv('NOTEEVENTS.csv')
-    diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
-    useful_hadms = diagnoses['HADM_ID'].unique()
-    # Take the top 20 notes for each category to extract sentences from
-    pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
-    pos_notes.columns= pos_notes.columns.str.lower()
-    neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
-    neg_notes.columns = neg_notes.columns.str.lower()
-    #TEXT is in column TEXT
-    pos_data = get_valid_sentences(pos_notes, 1)
-    neg_data = get_valid_sentences(neg_notes, 0)
-    final_data = pos_data + neg_data
-    train_df = pd.DataFrame(final_data).reset_index(drop=True)
-    train_df = train_df.drop_duplicates(subset=['text'], keep='first')
-    output_file = 'data3.csv'
-    train_df.to_csv(output_file)
-    train_df['label'] = train_df.apply(
-        lambda row: find_label(row['text'],row['label']), 
-        axis=1
-    )
-    train_df = train_df.drop_duplicates(subset=['text'], keep='first')
-    train_df.to_csv('d3label.csv')
+# if __name__ == "__main__":
+#     notes = pd.read_csv('NOTEEVENTS.csv')
+#     diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
+#     useful_hadms = diagnoses['HADM_ID'].unique()
+#     # Take the top 20 notes for each category to extract sentences from
+#     pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
+#     pos_notes.columns= pos_notes.columns.str.lower()
+#     neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
+#     neg_notes.columns = neg_notes.columns.str.lower()
+#     #TEXT is in column TEXT
+#     pos_data = get_valid_sentences(pos_notes, 1)
+#     neg_data = get_valid_sentences(neg_notes, 0)
+#     final_data = pos_data + neg_data
+#     train_df = pd.DataFrame(final_data).reset_index(drop=True)
+#     train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+#     output_file = 'data3.csv'
+#     train_df.to_csv(output_file)
+#     train_df['label'] = train_df.apply(
+#         lambda row: find_label(row['text'],row['label']), 
+#         axis=1
+#     )
+#     train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+#     train_df.to_csv('d3label.csv')
 
 

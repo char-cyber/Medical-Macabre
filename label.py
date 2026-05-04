@@ -122,9 +122,9 @@ notes = pd.read_csv('NOTEEVENTS.csv')
 diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
 useful_hadms = diagnoses['HADM_ID'].unique()
 # Take the top 20 notes for each category to extract sentences from
-pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=42)
+pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=42)
 pos_notes.columns= pos_notes.columns.str.lower()
-neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=42)
+neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=42)
 neg_notes.columns = neg_notes.columns.str.lower()
 #TEXT is in column TEXT
 pos_data = get_valid_sentences(pos_notes, 1)
