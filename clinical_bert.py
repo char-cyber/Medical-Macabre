@@ -73,7 +73,8 @@ test_ds = Dataset.from_pandas(test_df)
 
 # LOAD CLINICAL BERT  -----------------------------------------------------------------------------------------
 # model_name = "emilyalsentzer/Bio_ClinicalBERT"
-model_name = "/scratch/user/charu7465/Bio_ClinicalBERT"
+#model_name = "/scratch/user/charu7465/Bio_ClinicalBERT"
+model_name = "/scratch/user/charu7465/Bio_ClinicalBERT_new"
 
 # tokenizer = AutoTokenizer.from_pretrained(model_name)
 tokenizer = AutoTokenizer.from_pretrained(model_name, local_files_only=True)
@@ -211,7 +212,7 @@ trainer = Trainer(
     args=training_args,
     train_dataset=train_ds,
     eval_dataset=val_ds,
-    processing_class=tokenizer,
+    tokenizer=tokenizer,
     compute_metrics=compute_metrics,
     callbacks=[PrettyMetricsCallback()],
 )
