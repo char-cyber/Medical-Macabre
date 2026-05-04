@@ -9,101 +9,170 @@ try:
     nltk.download('punkt_tab')
 except:
     pass
-from wok import *
-useful_patterns = [
-    # Explicit diagnoses
-    r'diagnosed with', r'dx of', r'admitted for', r'treatment for',
-    r'history of', r'with.*cancer', r'with.*diabetes', r'with.*hypertension',
-    
-    # Specific conditions
-    r'acute', r'chronic', r'secondary to', r'due to', r'related to',
-    r'complicated by', r'with.*comorbidity', r'major', r'significant', r'hemorrhage', r'left', r'right'
+from splitting import *
+DIAGNOSIS_PATTERNS = [
+    r'\bdiagnosed with\b',
+    r'\bdx of\b',
+    r'\bimpression of\b',
+    r'\bconsistent with\b',
+    r'\bconfirmed\b',
 ]
-symptom_patterns = [
-    r'complains of', r'presented with', r'c/o', r'reports',
-    r'endorses', r'experiencing', r'symptoms include',
-    r'fever', r'pain', r'shortness of breath', r'nausea',
-    r'vomiting', r'diarrhea', r'cough', r'fatigue', r'bleeding', r'apnea', r'illness', r'disease'
+CONDITION_KEYWORDS = [
+    r'diabetes', r'hypertension', r'cancer', r'tumor', r'mass',
+    r'infection', r'pneumonia', r'sepsis', r'heart failure',
+    r'kidney failure', r'liver failure', r'syndrome', r'disorder',
+    r'injury', r'fracture', r'copd', r'asthma', r'anemia',
+    r'stroke', r'myocardial infarction', r'cva', r'tia',
+    r'depression', r'anxiety', r'thyroid'
 ]
-procedure_patterns = [
-    r'underwent', r'performed', r'procedure', r'surgery',
-    r'biopsy', r'resection', r'repair', r'replacement',
-    r'intubation', r'ventilation', r'dialysis'
+SYMPTOM_PATTERNS = [
+    r'\bcomplains of\b',
+    r'\bpresented with\b',
+    r'\breports\b',
+    r'\bc/o\b',
+    r'\bpain\b',
+    r'\bfever\b',
+    r'\bcough\b',
+    r'\bnausea\b',
+    r'\bshortness of breath\b',
+    r'\bfatigue\b'
 ]
-condition_keywords = [
-        r'diabetes', r'hypertension', r'cancer', r'tumor', r'mass',
-        r'infection', r'pneumonia', r'sepsis', r'failure', r'disease',
-        r'syndrome', r'disorder', r'injury', r'fracture', r'copd',
-        r'asthma', r'cellulitis', r'anemia', r'kidney', r'liver',r'intestin', r'fluid'
-        r'thyroid', r'depression', r'anxiety', r'stroke',
-        r'mi', r'myocardial infarction', r'cva', r'tia',r'blood', r'throat',r'abdomen', r'quadrant',r'abdominal', r'rectal'
-    ]
-medication_patterns = [
-    r'administered'
+PROCEDURE_PATTERNS = [
+    r'\bunderwent\b',
+    r'\bperformed\b',
+    r'\bsurgery\b',
+    r'\bbiopsy\b',
+    r'\bresection\b',
+    r'\bdialysis\b',
+    r'\bintubation\b',
+    r'\bventilation\b'
 ]
-lab_patterns = [
-    r'lab.*show', r'results.*reveal', r'elevated', r'decreased',
-    r'positive for', r'negative for', r'count of',
-    r'blood pressure', r'heart rate', r'temperature'
+LAB_PATTERNS = [
+    r'\belevated\b',
+    r'\bdecreased\b',
+    r'\bpositive\b',
+    r'\bnegative\b',
+    r'\bwhite blood cell\b',
+    r'\bhemoglobin\b',
+    r'\bplatelet\b',
+    r'\bblood pressure\b',
+    r'\bheart rate\b'
 ]
-not_useful_patterns = [
-    # Administrative
-    r'patient seen by', r'follow up', r'appointment',
-    r'discussed with', r'explained to', r'patient instructed',
-    
-    # Negative/rule-out (unless specifying what was ruled out)
-    r'no acute', r'no evidence', r'negative for', r'maintain', r'remain'
-    r'denies', r'without', r'excluding', r'non', r'no', r'unremarkable', r'unclear', r'unknown', r'unchanged',r'not consistent'
-    
-    # Demographic
-    r'year old', r'male|female', r'presenting for', r'lives', r'resides', r'home'
-    
-    # Generic/Non-specific
-    r'patient is stable', r'will continue', r'to follow',
-    r'as above', r'see below', r'refer to',
-
-    r'admission date', r'discharge date', r'date of birth'
+NON_RELEVANT_PATTERNS = [
+    r'\bfollow up\b',
+    r'\bappointment\b',
+    r'\bpatient instructed\b',
+    r'\bdiscussed with\b',
+    r'\bwill continue\b',
+    r'\bstable\b',
+    r'\bdischarge\b',
+    r'\badmission date\b',
+    r'\bdate of birth\b',
+    r'\bmale\b',
+    r'\bfemale\b',
+    r'\blives with\b',
+    r'\bresides\b',
+    r'admission date', r'discharge date', r'date of birth', r'no evidence', r'unremarkable', r'unclear', r'unknown', r'unchanged',r'not consistent'
 ]
-#df = pd.read_csv('train_data_initial_with_diagnosis.csv')
 def find_label(text, original_label):
     txt = str(text).lower()
-    #count useful indicators
-    useful_count = 0
-    for pattern in useful_patterns+symptom_patterns+procedure_patterns+condition_keywords+lab_patterns+medication_patterns:
-        if re.search(pattern, txt):
-            useful_count+=1
-    not_use = 0
-    for pattern in not_useful_patterns:
-        if re.search(pattern, txt):
-            not_use+=1
-    print('useful count', useful_count)
-    print('not useful', not_use)
-    if useful_count>not_use:
+
+    score = 0
+
+    # strong positive
+    for p in DIAGNOSIS_PATTERNS:
+        if re.search(p, txt):
+            score += 5
+
+    # conditions
+    for p in CONDITION_KEYWORDS:
+        if re.search(p, txt):
+            score += 3
+
+    # procedures
+    for p in PROCEDURE_PATTERNS:
+        if re.search(p, txt):
+            score += 4
+
+    # labs
+    for p in LAB_PATTERNS:
+        if re.search(p, txt):
+            score += 2
+
+    # symptoms
+    for p in SYMPTOM_PATTERNS:
+        if re.search(p, txt):
+            score += 1
+
+    # negative signals
+    for p in NON_RELEVANT_PATTERNS:
+        if re.search(p, txt):
+            score -= 3
+
+    # final decision rule
+    if score >= 3:
         return 1
-    elif not_use>useful_count:
+    elif score <= -2:
         return 0
     else:
         return original_label
-notes = pd.read_csv('NOTEEVENTS.csv')
-diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
-useful_hadms = diagnoses['HADM_ID'].unique()
-# Take the top 20 notes for each category to extract sentences from
-pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=42)
-pos_notes.columns= pos_notes.columns.str.lower()
-neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=42)
-neg_notes.columns = neg_notes.columns.str.lower()
-#TEXT is in column TEXT
-pos_data = get_valid_sentences(pos_notes, 1)
-neg_data = get_valid_sentences(neg_notes, 0)
-final_data = pos_data + neg_data
-train_df = pd.DataFrame(final_data).reset_index(drop=True)
-train_df = train_df.drop_duplicates(subset=['text'], keep='first')
-output_file = 'additional_data.csv'
-train_df.to_csv(output_file)
-train_df['label'] = train_df.apply(
-    lambda row: find_label(row['text'],row['label']), 
-    axis=1
-)
-train_df = train_df.drop_duplicates(subset=['text'], keep='first')
-train_df.to_csv('labeled_add_data.csv')
-
+#df = pd.read_csv('train_data_initial_with_diagnosis.csv')
+import spacy
+import pandas as pd
+try:
+    nlp = spacy.load("en_core_sci_md")
+except OSError:
+    spacy.cli.download("en_core_sci_md")
+    nlp = spacy.load("en_core_sci_md")
+def split_sections(text):
+    #split into colons, blank lines, bulletpoints
+    if pd.isna(text):
+        return []
+    results = []
+    #split by blank lines 
+    sentences = re.split(r'\n\s*\n+', text)
+    #also split by sentences
+    for section in sentences:
+        if not section.strip():
+            continue
+        sct = re.split(r'(?=discharge diagnosis:|discharge condition:)', section, flags=re.IGNORECASE)
+        for s in sct:
+            s = s.replace("-", "")
+        results.extend(sct)
+    return results
+def get_valid_sentences(df_subset, label):
+    valid = []
+    for text in df_subset['text'].dropna():
+        sections = split_sections(text)
+        for si in sections:
+            doc = nlp(si)
+            sentences = [sent.text for sent in doc.sents]
+            for s in sentences:
+                new_s = str(s).replace('\n', ' ')
+                new_s = re.sub(r'_+', '\n', new_s)
+                new_s = new_s.strip()
+                if len(new_s.split())>10:
+                    valid.append({'text': new_s, 'label': label})
+    return valid
+# notes = pd.read_csv('NOTEEVENTS.csv')
+# diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
+# useful_hadms = diagnoses['HADM_ID'].unique()
+# # Take the top 20 notes for each category to extract sentences from
+# pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=42)
+# pos_notes.columns= pos_notes.columns.str.lower()
+# neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=42)
+# neg_notes.columns = neg_notes.columns.str.lower()
+# #TEXT is in column TEXT
+# pos_data = get_valid_sentences(pos_notes, 1)
+# neg_data = get_valid_sentences(neg_notes, 0)
+# final_data = pos_data + neg_data
+# train_df = pd.DataFrame(final_data).reset_index(drop=True)
+# train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+# output_file = 'additional_data.csv'
+# train_df.to_csv(output_file)
+# train_df['label'] = train_df.apply(
+#     lambda row: find_label(row['text'],row['label']), 
+#     axis=1
+# )
+# train_df = train_df.drop_duplicates(subset=['text'], keep='first')
+# train_df.to_csv('labeled_add_data.csv')

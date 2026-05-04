@@ -11,6 +11,23 @@ except OSError:
 df = pd.read_csv('train_data-text_and_labels.csv')
 yeses = df[df['label']==1]
 nos = df[df['label']==0]
+def split_sections(text):
+    #split into colons, blank lines, bulletpoints
+    if pd.isna(text):
+        return []
+    results = []
+    #split by blank lines 
+    sentences = re.split(r'\n\s*\n+', text)
+    #also split by sentences
+    for section in sentences:
+        if not section.strip():
+            continue
+        sct = re.split(r'(?=discharge diagnosis:|discharge condition:)', section, flags=re.IGNORECASE)
+        for s in sct:
+            s = s.replace("-", "")
+        results.extend(sct)
+    return results
+
 def get_valid_sentences(df_subset, label):
     valid = []
     for text in df_subset['text'].dropna():
@@ -22,7 +39,7 @@ def get_valid_sentences(df_subset, label):
                 new_s = str(s).replace('\n', ' ')
                 new_s = re.sub(r'_+', '\n', new_s)
                 new_s = new_s.strip()
-                if len(s)>5:
+                if len(new_s.split())>10:
                     valid.append({'text': new_s, 'label': label})
     return valid
 # pos_data = get_valid_sentences(yeses,1)
@@ -44,9 +61,9 @@ notes = pd.read_csv('NOTEEVENTS.csv')
 diagnoses = pd.read_csv('DIAGNOSES_ICD.csv')
 useful_hadms = diagnoses['HADM_ID'].unique()
 # Take the top 20 notes for each category to extract sentences from
-pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
+pos_notes = notes[notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=21)
 pos_notes.columns= pos_notes.columns.str.lower()
-neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=10, random_state=21)
+neg_notes = notes[~notes['HADM_ID'].isin(useful_hadms)].sample(n=100, random_state=21)
 neg_notes.columns = neg_notes.columns.str.lower()
 #TEXT is in column TEXT
 pos_data = get_valid_sentences(pos_notes, 1)
