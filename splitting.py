@@ -1,30 +1,31 @@
-import spacy
-import pandas as pd
-from label import *
-from words import *
-import re
-try:
-    nlp = spacy.load("en_core_sci_md")
-except OSError:
-    spacy.cli.download("en_core_sci_md")
-    nlp = spacy.load("en_core_sci_md")
-df = pd.read_csv('train_data-text_and_labels.csv')
-yeses = df[df['label']==1]
-nos = df[df['label']==0]
-def get_valid_sentences(df_subset, label):
-    valid = []
-    for text in df_subset['text'].dropna():
-        sections = split_sections(text)
-        for si in sections:
-            doc = nlp(si)
-            sentences = [sent.text for sent in doc.sents]
-            for s in sentences:
-                new_s = str(s).replace('\n', ' ')
-                new_s = re.sub(r'_+', '\n', new_s)
-                new_s = new_s.strip()
-                if len(s)>10:
-                    valid.append({'text': new_s, 'label': label})
-    return valid
+# import spacy
+# import pandas as pd
+# from label import *
+# from words import *
+# import re
+# try:
+#     nlp = spacy.load("en_core_sci_md")
+# except OSError:
+#     spacy.cli.download("en_core_sci_md")
+#     nlp = spacy.load("en_core_sci_md")
+# df = pd.read_csv('train_data-text_and_labels.csv')
+# yeses = df[df['label']==1]
+# nos = df[df['label']==0]
+# def get_valid_sentences(df_subset, label):
+#     valid = []
+#     for text in df_subset['text'].dropna():
+#         sections = split_sections(text)
+#         for si in sections:
+#             doc = nlp(si)
+#             sentences = [sent.text for sent in doc.sents]
+#             for s in sentences:
+#                 new_s = str(s).replace('\n', ' ')
+#                 new_s = re.sub(r'_+', '\n', new_s)
+#                 new_s = new_s.strip()
+#                 if len(s)>10:
+#                     valid.append({'text': new_s, 'label': label})
+#     return valid
+
 # pos_data = get_valid_sentences(yeses,1)
 # neg_data = get_valid_sentences(nos, 0)      
 # final_data = pos_data + neg_data
