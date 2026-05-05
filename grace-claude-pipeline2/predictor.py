@@ -72,6 +72,11 @@ HISTORY_PHRASES = [
 
 WINDOW_SIZE = 6
 
+def predict_with_threshold(ensemble, texts, threshold=0.3):
+    """Lower threshold to catch more useful sentences"""
+    probs = ensemble.predict_proba(texts)
+    # Return 1 if prob of class 1 > threshold (default 0.5 → 0.3)
+    return (probs[:, 1] > threshold).astype(int)
 
 def tokenize(text):
     return re.findall(r"\b\w+\b", str(text).lower())

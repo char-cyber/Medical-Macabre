@@ -96,7 +96,8 @@ def main():
     print("=" * 60)
     # train_df = engineer_labels(train_df, label_col="label")
     print("Skipping label engineering....")
-
+    from label_engineer import balance_training_data
+    train_df = balance_training_data(train_df)
     if not args.no_external:
         print("\n" + "=" * 60)
         print("STAGE 4: External data augmentation")

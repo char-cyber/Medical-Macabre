@@ -18,6 +18,7 @@ import os, json
 import numpy as np
 import pandas as pd
 import torch
+import re
 import torch.nn as nn
 from pathlib import Path
 from sklearn.model_selection import train_test_split
@@ -39,22 +40,52 @@ from transformers import (
 )
 
 USE_FP16 = torch.cuda.is_available()
-MAX_LENGTH       = 128
+MAX_LENGTH       = 256
 NUM_EPOCHS       = 3
 BATCH_SIZE       = 8
 EVAL_BATCH_SIZE  = 16
-LEARNING_RATE    = 2e-5
+LEARNING_RATE    = 3e-5
 WEIGHT_DECAY     = 0.01
 WARMUP_RATIO     = 0.1
 EARLY_STOP_PAT   = 3
 DATALOADER_WORKERS = 2
 RANDOM_STATE     = 42
+GRADIENT_ACCUMULATION_STEPS = 2
 
-
+def extract_clinical_features(texts: list[str]) -> np.ndarray:
+    """Add hand-crafted clinical features"""
+    features = []
+    
+    # Clinical patterns
+    icd9_pattern = re.compile(r'\b\d{3}\.\d{1,2}\b')
+    icd10_pattern = re.compile(r'[A-Z][0-9]{2}\.[0-9]{1,2}')
+    
+    for text in texts:
+        f = []
+        # Length features
+        f.append(len(text.split()))
+        f.append(len(text))
+        
+        # ICD code presence
+        f.append(1 if icd9_pattern.search(text) else 0)
+        f.append(1 if icd10_pattern.search(text) else 0)
+        
+        # Section header importance (HPI, Assessment are more valuable)
+        section_boost = 0
+        if any(header in text.lower() for header in ['hpi', 'assessment', 'impression']):
+            section_boost = 1
+        f.append(section_boost)
+        
+        # Numerical values (labs, vitals)
+        f.append(len(re.findall(r'\b\d+(?:\.\d+)?\b', text)))
+        
+        features.append(f)
+    
+    return np.array(features)
 # =============================================================================
 # WEIGHTED LOSS TRAINER
 # =============================================================================
-class WeightedLossTrainer(Trainer):
+class WeightedLossTrainer(Trainer): #lets make this focal loss
     def __init__(self, class_weights, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.class_weights = class_weights
@@ -324,11 +355,22 @@ class Ensemble:
 
     def predict_proba(self, texts: list[str]) -> np.ndarray:
         bert_p = self._bert_proba(texts)                            # (N, 2)
-        lr_p   = self.lr_pipeline.predict_proba(texts)              # (N, 2)
-        return self.bert_weight * bert_p + self.lr_weight * lr_p    # (N, 2)
+        lr_p   = self.lr_pipeline.predict_proba(texts)
+        clinical_features = extract_clinical_features(texts)
+        # Simple rule-based boost for high-confidence clinical features
+        feature_boost = np.clip(clinical_features[:, 2] * 0.2, 0, 0.3) 
+        # Weighted combination
+        combined = (0.6 * bert_p + 0.3 * lr_p)
+        
+        # Apply feature boost to class 1 probability
+        combined[:, 1] += feature_boost
+        combined = combined / combined.sum(axis=1, keepdims=True)
+        
+        return combined            # (N, 2)
+        #return self.bert_weight * bert_p + self.lr_weight * lr_p    # (N, 2)
 
-    def predict(self, texts: list[str]) -> np.ndarray:
-        return self.predict_proba(texts).argmax(axis=-1)
+    def predict(self, texts: list[str], threshold: float = 0.35) -> np.ndarray:
+        return (self.predict_proba(texts)[:, 1] > threshold).astype(int)
 
     # ADDED
     def predict_proba_class1(self, texts: list[str]) -> np.ndarray:

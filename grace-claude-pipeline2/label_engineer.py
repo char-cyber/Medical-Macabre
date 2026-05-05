@@ -18,7 +18,39 @@ Strategy:
 
 import re
 import pandas as pd
-
+import numpy as np
+# Add to label_engineer.py - active learning style oversampling
+def balance_training_data(train_df: pd.DataFrame) -> pd.DataFrame:
+    """Synthetic oversampling for minority class (useful sentences)"""
+    df_useful = train_df[train_df['label'] == 1]
+    df_not = train_df[train_df['label'] == 0]
+    
+    if len(df_useful) == 0:
+        return train_df
+    
+    # Calculate how many synthetic samples needed
+    target_ratio = 0.4  # Aim for 40% useful, 60% not useful
+    target_useful = int(len(df_not) * target_ratio / (1 - target_ratio))
+    n_synthetic = max(0, target_useful - len(df_useful))
+    
+    if n_synthetic > 0:
+        # Simple augmentation: shuffle & combine existing useful sentences
+        synthetic = []
+        for _ in range(n_synthetic // len(df_useful) + 1):
+            shuffled = df_useful.sample(frac=1, replace=True).reset_index(drop=True)
+            synthetic.append(shuffled)
+        
+        synthetic_df = pd.concat(synthetic, ignore_index=True).head(n_synthetic)
+        
+        # Add slight noise to text (optional: random word dropout)
+        synthetic_df['text'] = synthetic_df['text'].apply(
+            lambda x: ' '.join(x.split()[:np.random.randint(5, len(x.split()))]) 
+            if len(x.split()) > 10 else x
+        )
+        
+        return pd.concat([train_df, synthetic_df], ignore_index=True)
+    
+    return train_df
 # =============================================================================
 # NEGATION PATTERNS
 # These cover the most common clinical negation constructions.
@@ -57,6 +89,21 @@ _NEG_RE = re.compile(
     "|".join(NEGATION_PATTERNS),
     re.IGNORECASE,
 )
+def enhanced_negation_detection(text: str) -> bool:
+    """Detect if sentence contains negation - mark as -1"""
+    text_lower = text.lower()
+    
+    # Check if negation is within 5 words of ICD-codable term
+    icd_triggers = ['diagnosis', 'pneumonia', 'mi', 'failure', 'infection', 'cancer']
+    
+    for neg_pattern in NEGATION_PATTERNS:
+        matches = re.finditer(neg_pattern, text_lower)
+        for match in matches:
+            # Look ahead 10 words for ICD triggers
+            window = text_lower[match.end():match.end() + 100]
+            if any(trigger in window for trigger in icd_triggers):
+                return True
+    return False
 
 
 def has_negation(text: str) -> bool:
