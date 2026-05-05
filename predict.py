@@ -1,50 +1,130 @@
 """
 predict.py
 ==========
-Runs inference with EITHER (or both):
-  - The saved ClinicalBERT checkpoint  (<model_dir>/best_model/)
-  - The saved Logistic Regression pipeline (<model_dir>/lr_model/pipeline.pkl)
-
-Writes  testXX-pred.csv  files (columns: id, label) for the Gradescope autograder.
-If both models are available and --ensemble is set, predictions are combined by
-majority vote (LR + BERT logits vote; BERT wins ties).
+Each row in the test CSV is a full clinical note (row_id, text).
+Pipeline:
+  1. Split each note into sentences  (section regex + scispaCy, same as data_prep.py)
+  2. Predict every sentence          (ClinicalBERT and/or Logistic Regression)
+  3. Aggregate back to note level    (fraction of sentences labeled 1 >= threshold)
+  4. Write one output row per note   (row_id, label)
 
 Usage:
-    # BERT only
+    # BERT only (default)
     python predict.py \
-        --model_dir /scratch/user/charu7465/baseline_results/clinicalbert \
-        --test_files test1_text_only.csv test2_text_only.csv \
-        --output_dir ./predictions
+        --model_dir  /scratch/user/charu7465/baseline_results/clinicalbert \
+        --test_files test01_text_only.csv test02_text_only.csv test03_text_only.csv \
+        --output_dir ./predictions \
+        --threshold  0.3
 
     # LR only
-    python predict.py \
-        --model_dir /scratch/user/charu7465/baseline_results/clinicalbert \
-        --test_files test1_text_only.csv \
-        --output_dir ./predictions \
-        --use_lr_only
+    python predict.py ... --use_lr_only
 
     # Ensemble
-    python predict.py \
-        --model_dir /scratch/user/charu7465/baseline_results/clinicalbert \
-        --test_files test1_text_only.csv \
-        --output_dir ./predictions \
-        --ensemble
+    python predict.py ... --ensemble --bert_weight 0.7
 """
 
 import argparse
 import os
 import re
 import pickle
+import warnings
 import pandas as pd
 import numpy as np
 import torch
 from torch.utils.data import Dataset, DataLoader
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
+warnings.filterwarnings("ignore")
 
-# ── Text cleaning (mirrors data_prep.py) ──────────────────────────────────────
 
-def clean_text(text: str) -> str:
+# ─────────────────────────────────────────────────────────────────────────────
+# Section splitting  (identical to data_prep.py)
+# ─────────────────────────────────────────────────────────────────────────────
+
+SECTION_PATTERNS = [
+    r"(?i)^(chief complaint|cc)\s*:",
+    r"(?i)^(history of present illness|hpi)\s*:",
+    r"(?i)^(past medical history|pmh|past medical hx)\s*:",
+    r"(?i)^(past surgical history|psh)\s*:",
+    r"(?i)^(medications?|current medications?|meds)\s*:",
+    r"(?i)^(allergies|nkda|nkma)\s*:",
+    r"(?i)^(review of systems?|ros)\s*:",
+    r"(?i)^(physical exam(ination)?|pe|vital signs?|vitals?)\s*:",
+    r"(?i)^(labs?|laboratory|lab results?|laboratory data)\s*:",
+    r"(?i)^(imaging|radiology|radiologic)\s*:",
+    r"(?i)^(assessment|impression|findings?)\s*:",
+    r"(?i)^(assessment and plan|a/p|a&p)\s*:",
+    r"(?i)^(plan|treatment plan)\s*:",
+    r"(?i)^(diagnosis|diagnoses|dx)\s*:",
+    r"(?i)^(discharge (diagnosis|summary|instructions?|condition|medications?))\s*:",
+    r"(?i)^(procedures?|operative note)\s*:",
+    r"(?i)^(social history|sh)\s*:",
+    r"(?i)^(family history|fh)\s*:",
+    r"(?i)^(hospital course|brief hospital course)\s*:",
+    r"(?i)^(follow.?up)\s*:",
+]
+_SECTION_RE = re.compile("|".join(SECTION_PATTERNS), re.MULTILINE)
+
+
+def split_into_sections(note_text):
+    note_text = str(note_text)
+    boundaries = [m.start() for m in _SECTION_RE.finditer(note_text)]
+    if not boundaries:
+        return [note_text]
+    sections = []
+    boundaries.append(len(note_text))
+    for i in range(len(boundaries) - 1):
+        chunk = note_text[boundaries[i]:boundaries[i + 1]]
+        chunk = re.sub(r'^[^\n]+\n?', '', chunk, count=1)
+        chunk = chunk.strip()
+        if chunk:
+            sections.append(chunk)
+    return sections if sections else [note_text]
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Sentence splitting  (identical to data_prep.py)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def load_spacy():
+    try:
+        import spacy
+        try:
+            return spacy.load("en_core_sci_sm")
+        except OSError:
+            try:
+                return spacy.load("en_core_sci_lg")
+            except OSError:
+                print("  [WARN] scispaCy model not found -- falling back to sentencizer.")
+                nlp = spacy.blank("en")
+                nlp.add_pipe("sentencizer")
+                return nlp
+    except ImportError:
+        print("  [WARN] spaCy not installed -- using regex sentence splitter.")
+        return None
+
+
+def regex_sentence_split(text):
+    sentences = re.split(r'(?<=[.!?])\s+(?=[A-Z])', text)
+    return [s.strip() for s in sentences if s.strip()]
+
+
+def split_sentences(text, nlp):
+    if nlp is None:
+        return regex_sentence_split(text)
+    MAX_CHARS = 100_000
+    if len(text) > MAX_CHARS:
+        text = text[:MAX_CHARS]
+    doc = nlp(text)
+    sents = [s.text.strip() for s in doc.sents if s.text.strip()]
+    return sents if sents else regex_sentence_split(text)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Text cleaning  (identical to data_prep.py)
+# ─────────────────────────────────────────────────────────────────────────────
+
+def clean_text(text):
     text = str(text).replace('\n', ' ')
     text = re.sub(r'_+', ' ', text)
     text = re.sub(r'\[.*?\]', ' ', text)
@@ -52,7 +132,23 @@ def clean_text(text: str) -> str:
     return text.strip()
 
 
-# ── Dataset (ClinicalBERT inference) ──────────────────────────────────────────
+def note_to_sentences(note_text, nlp):
+    sentences = []
+    for section in split_into_sections(note_text):
+        for sent in split_sentences(section, nlp):
+            s = clean_text(sent)
+            if len(s) >= 15:
+                sentences.append(s)
+    if not sentences:
+        s = clean_text(note_text)
+        if s:
+            sentences = [s]
+    return sentences
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Dataset
+# ─────────────────────────────────────────────────────────────────────────────
 
 class InferenceDataset(Dataset):
     def __init__(self, texts, tokenizer, max_len):
@@ -77,13 +173,18 @@ class InferenceDataset(Dataset):
         }
 
 
-# ── BERT inference ─────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Sentence-level inference
+# ─────────────────────────────────────────────────────────────────────────────
 
-def predict_bert(model, loader, device):
-    """Returns hard predictions (0/1) and softmax probabilities."""
+def predict_bert_sentences(texts, tokenizer, model, device, batch_size, max_len):
+    if not texts:
+        return np.array([], dtype=int), np.zeros((0, 2))
+    dataset = InferenceDataset(texts, tokenizer, max_len)
+    loader  = DataLoader(dataset, batch_size=batch_size,
+                         shuffle=False, num_workers=2, pin_memory=True)
     model.eval()
-    all_preds = []
-    all_probs = []
+    all_preds, all_probs = [], []
     with torch.no_grad():
         for batch in loader:
             input_ids      = batch['input_ids'].to(device)
@@ -96,24 +197,27 @@ def predict_bert(model, loader, device):
     return np.array(all_preds), np.array(all_probs)
 
 
-# ── LR inference ──────────────────────────────────────────────────────────────
-
-def predict_lr(pipeline, texts):
-    """Returns hard predictions (0/1) and predict_proba output."""
+def predict_lr_sentences(texts, pipeline):
+    if not texts:
+        return np.array([], dtype=int), np.zeros((0, 2))
     preds = pipeline.predict(texts)
     probs = pipeline.predict_proba(texts)
     return np.array(preds), np.array(probs)
 
 
-# ── Ensemble ───────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Note-level aggregation
+# ─────────────────────────────────────────────────────────────────────────────
 
-def ensemble_predict(bert_probs, lr_probs, bert_weight=0.7, lr_weight=0.3):
-    """Weighted average of class probabilities; argmax for final label."""
-    combined = bert_weight * bert_probs + lr_weight * lr_probs
-    return np.argmax(combined, axis=1)
+def aggregate_note(sent_preds, threshold):
+    if len(sent_preds) == 0:
+        return 0
+    return int(sent_preds.mean() >= threshold)
 
 
-# ── Load models ────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Model loaders
+# ─────────────────────────────────────────────────────────────────────────────
 
 def load_bert(model_dir, device, hf_cache=None):
     bert_path = os.path.join(model_dir, 'best_model')
@@ -137,117 +241,157 @@ def load_lr(model_dir):
     return pipeline
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Main
+# ─────────────────────────────────────────────────────────────────────────────
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_dir',   required=True,
-                        help='Parent dir containing best_model/ and/or lr_model/.')
+    parser.add_argument('--model_dir',   required=True)
     parser.add_argument('--test_files',  nargs='+', required=True)
     parser.add_argument('--output_dir',  default='./predictions')
-    parser.add_argument('--max_len',     type=int, default=128)
-    parser.add_argument('--batch_size',  type=int, default=32)
-    parser.add_argument('--use_lr_only', action='store_true',
-                        help='Use only the Logistic Regression model.')
-    parser.add_argument('--ensemble',    action='store_true',
-                        help='Ensemble BERT + LR predictions (weighted average).')
-    parser.add_argument('--bert_weight', type=float, default=0.7,
-                        help='BERT weight in ensemble (LR weight = 1 - bert_weight).')
+    parser.add_argument('--max_len',     type=int,   default=128)
+    parser.add_argument('--batch_size',  type=int,   default=32)
+    parser.add_argument('--threshold',   type=float, default=0.3,
+                        help='Fraction of sentences predicted 1 needed to label a note '
+                             'as 1. E.g. 0.3 means >=30%% of sentences must be positive.')
+    parser.add_argument('--use_lr_only', action='store_true')
+    parser.add_argument('--ensemble',    action='store_true')
+    parser.add_argument('--bert_weight', type=float, default=0.7)
     args = parser.parse_args()
 
     os.makedirs(args.output_dir, exist_ok=True)
     device   = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     hf_cache = os.environ.get('TRANSFORMERS_CACHE', None)
     print(f"Using device: {device}")
+    print(f"Threshold: {args.threshold} "
+          f"(note=1 if >= {args.threshold*100:.0f}% of its sentences are predicted 1)")
 
-    # ── Load models ────────────────────────────────────────────────────────────
-    tokenizer, bert_model = (None, None)
-    lr_pipeline           = None
+    # Load scispaCy
+    print("Loading scispaCy...")
+    nlp = load_spacy()
+
+    # Load models
+    tokenizer, bert_model = None, None
+    lr_pipeline = None
 
     if not args.use_lr_only:
         tokenizer, bert_model = load_bert(args.model_dir, device, hf_cache)
         if bert_model is None:
-            print("  [WARN] No ClinicalBERT checkpoint found at "
+            print(f"  [WARN] No ClinicalBERT checkpoint at "
                   f"{os.path.join(args.model_dir, 'best_model')}.")
 
     lr_pipeline = load_lr(args.model_dir)
-    if lr_pipeline is None:
-        print("  [WARN] No LR pipeline found at "
-              f"{os.path.join(args.model_dir, 'lr_model', 'pipeline.pkl')}.")
 
     if bert_model is None and lr_pipeline is None:
         raise RuntimeError("No models found. Check --model_dir.")
 
-    # Decide prediction mode
-    use_bert     = (bert_model is not None) and (not args.use_lr_only)
-    use_lr       = (lr_pipeline is not None)
-    do_ensemble  = args.ensemble and use_bert and use_lr
+    use_bert    = (bert_model is not None) and (not args.use_lr_only)
+    use_lr      = (lr_pipeline is not None)
+    do_ensemble = args.ensemble and use_bert and use_lr
 
     if do_ensemble:
-        print(f"Mode: ENSEMBLE (BERT weight={args.bert_weight:.2f}, "
-              f"LR weight={1-args.bert_weight:.2f})")
+        print(f"Mode: ENSEMBLE  (BERT {args.bert_weight:.0%} / LR {1-args.bert_weight:.0%})")
     elif use_bert:
         print("Mode: ClinicalBERT only")
     else:
         print("Mode: Logistic Regression only")
 
-    # ── Process each test file ─────────────────────────────────────────────────
+    # Process each test file
     for test_path in args.test_files:
         if not os.path.exists(test_path):
             print(f"  [WARN] Not found, skipping: {test_path}")
             continue
 
+        print(f"\n{'='*60}")
+        print(f"Processing: {test_path}")
+        print(f"{'='*60}")
+
         df = pd.read_csv(test_path)
         df.columns = df.columns.str.strip().str.lower()
 
-        text_col = next(
-            (c for c in ('text', 'sentence', 'note', 'notes') if c in df.columns), None)
+        id_col   = next((c for c in ('row_id', 'id', 'idx', 'index') if c in df.columns), None)
+        text_col = next((c for c in ('text', 'sentence', 'note', 'notes') if c in df.columns), None)
         if text_col is None:
             raise ValueError(f"No text column in {test_path}. Columns: {list(df.columns)}")
 
-        id_col = next((c for c in ('id', 'idx', 'index') if c in df.columns), None)
-        texts  = df[text_col].fillna('').apply(clean_text).tolist()
+        note_ids   = df[id_col].tolist() if id_col else list(range(len(df)))
+        note_texts = df[text_col].fillna('').tolist()
 
-        # Logistic Regression predictions
-        lr_preds, lr_probs = None, None
-        if use_lr:
-            lr_preds, lr_probs = predict_lr(lr_pipeline, texts)
+        note_labels      = []
+        note_sent_counts = []
+        note_pos_fracs   = []
 
-        # ClinicalBERT predictions
-        bert_preds, bert_probs = None, None
-        if use_bert:
-            dataset      = InferenceDataset(texts, tokenizer, args.max_len)
-            loader       = DataLoader(dataset, batch_size=args.batch_size,
-                                      shuffle=False, num_workers=2, pin_memory=True)
-            bert_preds, bert_probs = predict_bert(bert_model, loader, device)
+        for i, (note_id, note_text) in enumerate(zip(note_ids, note_texts)):
+            sentences = note_to_sentences(note_text, nlp)
 
-        # Combine
-        if do_ensemble:
-            preds = ensemble_predict(bert_probs, lr_probs,
-                                     bert_weight=args.bert_weight,
-                                     lr_weight=1.0 - args.bert_weight)
-        elif use_bert:
-            preds = bert_preds
-        else:
-            preds = lr_preds
+            if not sentences:
+                note_labels.append(0)
+                note_sent_counts.append(0)
+                note_pos_fracs.append(0.0)
+                continue
 
-        # Build output dataframe
-        if id_col:
-            out_df = pd.DataFrame({'id': df[id_col].values, 'label': preds})
-        else:
-            out_df = pd.DataFrame({'id': range(len(preds)), 'label': preds})
+            # Sentence-level predictions
+            if do_ensemble:
+                bert_preds, bert_probs = predict_bert_sentences(
+                    sentences, tokenizer, bert_model, device,
+                    args.batch_size, args.max_len)
+                lr_preds, lr_probs = predict_lr_sentences(sentences, lr_pipeline)
+                combined   = args.bert_weight * bert_probs + (1 - args.bert_weight) * lr_probs
+                sent_preds = np.argmax(combined, axis=1)
+            elif use_bert:
+                sent_preds, _ = predict_bert_sentences(
+                    sentences, tokenizer, bert_model, device,
+                    args.batch_size, args.max_len)
+            else:
+                sent_preds, _ = predict_lr_sentences(sentences, lr_pipeline)
 
-        # Derive output filename: test1_text_only.csv → test1-pred.csv
+            pos_frac   = float(sent_preds.mean())
+            note_label = aggregate_note(sent_preds, args.threshold)
+
+            note_labels.append(note_label)
+            note_sent_counts.append(len(sentences))
+            note_pos_fracs.append(pos_frac)
+            print(f"    note {note_id}: {len(sentences)} sentences, {pos_frac*100:.1f}% positive → label={note_label}")
+
+
+            if (i + 1) % 50 == 0:
+                print(f"  Processed {i+1}/{len(note_ids)} notes...")
+
+        # Output filename: test01_text_only.csv -> test01-pred.csv
         base     = os.path.basename(test_path)
         stem     = os.path.splitext(base)[0]
         stem     = re.sub(r'_text_only$', '', stem, flags=re.IGNORECASE)
         out_name = f"{stem}-pred.csv"
         out_path = os.path.join(args.output_dir, out_name)
 
-        out_df.to_csv(out_path, index=False)
-        pos_pct = preds.mean() * 100
-        print(f"  {base} → {out_path}  "
-              f"({len(preds)} rows, {pos_pct:.1f}% predicted positive)")
+        # Gradescope submission file (id + label only)
+        pd.DataFrame({'id': note_ids, 'label': note_labels}).to_csv(out_path, index=False)
+
+        # Debug file with sentence stats
+        debug_path = out_path.replace('.csv', '_debug.csv')
+        pd.DataFrame({
+            'id':            note_ids,
+            'label':         note_labels,
+            'n_sentences':   note_sent_counts,
+            'pct_sent_pos':  [f"{f*100:.1f}%" for f in note_pos_fracs],
+        }).to_csv(debug_path, index=False)
+
+        # Summary
+        n_notes    = len(note_labels)
+        n_positive = sum(note_labels)
+        avg_sents  = np.mean(note_sent_counts) if note_sent_counts else 0
+        avg_pos    = np.mean(note_pos_fracs)   if note_pos_fracs   else 0
+
+        print(f"\n  Results for {base}:")
+        print(f"    Total notes:          {n_notes}")
+        print(f"    Labeled 1 (codable):  {n_positive}  ({n_positive/n_notes*100:.1f}%)")
+        print(f"    Labeled 0:            {n_notes-n_positive}  ({(n_notes-n_positive)/n_notes*100:.1f}%)")
+        print(f"    Avg sentences/note:   {avg_sents:.1f}")
+        print(f"    Avg % sentences pos:  {avg_pos*100:.1f}%")
+        print(f"    Threshold used:       {args.threshold}")
+        print(f"    Submission file:      {out_path}")
+        print(f"    Debug file:           {debug_path}")
 
     print("\nPredictions complete.")
 

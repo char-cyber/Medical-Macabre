@@ -227,12 +227,14 @@ def train_clinicalbert(train_df, val_df, args, device):
             labels         = batch['labels'].to(device)
 
             optimizer.zero_grad()
-            outputs = model(input_ids=input_ids, attention_mask=attention_mask)
-            loss    = loss_fn(outputs.logits, labels)
+            outputs = model(input_ids=input_ids, attention_mask=attention_mask, labels = labels)
+            loss    = outputs.loss /args.grad_accum
             loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            optimizer.step()
-            scheduler.step()
+            if step % args.grad_accum == 0:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                optimizer.step()
+                scheduler.step()
+                optimizer.zero_grad()
 
             running_loss += loss.item()
             if step % 50 == 0:
@@ -259,6 +261,7 @@ def main():
     parser.add_argument('--train_csv',   required=True)
     parser.add_argument('--val_csv',     required=True)
     parser.add_argument('--output_dir',  required=True)
+    parser.add_argument('--grad_accum',  default=2)
     parser.add_argument('--model_name',  default='emilyalsentzer/Bio_ClinicalBERT')
     parser.add_argument('--epochs',      type=int,   default=4)
     parser.add_argument('--batch_size',  type=int,   default=16)
