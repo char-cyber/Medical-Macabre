@@ -1,116 +1,121 @@
-import argparse
-import os
-import glob
-import pandas as pd
+import os, json
 import numpy as np
+import pandas as pd
+import torch
+from sklearn.metrics import f1_score, accuracy_score
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, f1_score
-from preprocess import split_sentences, weak_label, clean_text
-from model_utils import MODEL_NAMES, BertEmbedder, train_lr_on_embeddings, save_ensemble, label_to_binary
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
+from torch.utils.data import Dataset, DataLoader
 
-TEXT_CANDIDATES = ["sentence", "text", "note", "note_text", "TEXT", "clinical_note"]
-LABEL_CANDIDATES = ["label", "useful", "target", "y", "codable"]
+MODEL_NAME = "bert_model"  # local model
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+BATCH_SIZE = 16
+EPOCHS = 3
+LR = 2e-5
+MAX_LEN = 256
 
-def pick_col(df, candidates):
-    for c in candidates:
-        if c in df.columns:
-            return c
-    return None
+# ---------------- DATA ----------------
+df1 = pd.read_csv("data/train_data-text_and_labels.csv")
+df2 = pd.read_csv("data/new_train.csv")
 
+df = pd.concat([df1, df2]).drop_duplicates(subset="text")
 
-def load_labeled_csv(path):
-    df = pd.read_csv(path)
-    text_col = pick_col(df, TEXT_CANDIDATES)
-    label_col = pick_col(df, LABEL_CANDIDATES)
-    if text_col is None or label_col is None:
-        raise ValueError(f"Could not find text and label columns in {path}. Columns: {list(df.columns)}")
-    out = pd.DataFrame({"sentence": df[text_col].astype(str).map(clean_text), "label": df[label_col].map(label_to_binary)})
-    return out[out["sentence"].str.len() > 0]
+texts = df["text"].astype(str).fillna("").tolist()
+labels = df["label"].astype(int).tolist()
 
+X_train, X_val, y_train, y_val = train_test_split(
+    texts, labels, test_size=0.1, random_state=42, stratify=labels
+)
 
-def load_manual(path):
-    if not path or not os.path.exists(path):
-        return pd.DataFrame(columns=["sentence", "label"])
-    df = pd.read_csv(path)
-    text_col = pick_col(df, TEXT_CANDIDATES)
-    label_col = pick_col(df, ["manual_label", "label", "useful", "target"])
-    if text_col is None or label_col is None:
-        raise ValueError(f"Manual labels need sentence/text and label columns. Columns: {list(df.columns)}")
-    labels = df[label_col].apply(lambda x: 0 if str(x).strip() == "-1" else label_to_binary(x))
-    return pd.DataFrame({"sentence": df[text_col].astype(str).map(clean_text), "label": labels})
+# ---------------- TOKENIZER ----------------
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, local_files_only=True)
+tokenizer.truncation_side = "left"
 
+# ---------------- DATASET ----------------
+class TextDataset(Dataset):
+    def __init__(self, texts, labels):
+        self.texts = texts
+        self.labels = labels
 
-def make_weak_examples(notes_glob, max_examples):
-    rows = []
-    if not notes_glob:
-        return pd.DataFrame(columns=["sentence", "label"])
-    for path in glob.glob(notes_glob):
-        df = pd.read_csv(path)
-        text_col = pick_col(df, TEXT_CANDIDATES)
-        if text_col is None:
-            continue
-        for note in df[text_col].dropna().astype(str):
-            for item in split_sentences(note):
-                wl = weak_label(item["sentence"])
-                # Treat -1 as a strong negative, because negated findings usually are not codable for the diagnosis itself.
-                y = 0 if wl == -1 else wl
-                rows.append({"sentence": item["sentence"], "label": y})
-                if len(rows) >= max_examples:
-                    return pd.DataFrame(rows)
-    return pd.DataFrame(rows)
+    def __len__(self):
+        return len(self.texts)
 
+    def __getitem__(self, idx):
+        enc = tokenizer(
+            self.texts[idx],
+            truncation=True,
+            padding="max_length",
+            max_length=MAX_LEN,
+            return_tensors="pt"
+        )
+        item = {k: v.squeeze(0) for k, v in enc.items()}
+        item["labels"] = torch.tensor(self.labels[idx])
+        return item
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--train_csv", required=True)
-    ap.add_argument("--manual_csv", default="")
-    ap.add_argument("--weak_notes_glob", default="")
-    ap.add_argument("--weak_max", type=int, default=3000)
-    ap.add_argument("--models", nargs="+", default=MODEL_NAMES)
-    ap.add_argument("--cache_dir", default="./hf_cache")
-    ap.add_argument("--out", default="artifacts/icd_ensemble.joblib")
-    ap.add_argument("--batch_size", type=int, default=16)
-    args = ap.parse_args()
+train_loader = DataLoader(TextDataset(X_train, y_train), batch_size=BATCH_SIZE, shuffle=True)
+val_loader = DataLoader(TextDataset(X_val, y_val), batch_size=BATCH_SIZE)
 
-    train = load_labeled_csv(args.train_csv)
-    manual = load_manual(args.manual_csv)
-    weak = make_weak_examples(args.weak_notes_glob, args.weak_max)
+# ---------------- MODEL ----------------
+model = AutoModelForSequenceClassification.from_pretrained(
+    MODEL_NAME,
+    num_labels=2,
+    local_files_only=True
+).to(DEVICE)
 
-    df = pd.concat([train, manual, weak], ignore_index=True).drop_duplicates("sentence")
-    df = df[df["sentence"].str.split().str.len().between(3, 128)]
-    print(f"Loaded labeled rows: train={len(train)}, manual={len(manual)}, weak={len(weak)}, final={len(df)}")
-    print(df["label"].value_counts())
+optimizer = torch.optim.AdamW(model.parameters(), lr=LR)
 
-    texts = df["sentence"].tolist()
-    y = df["label"].astype(int).values
-    strat = y if len(set(y)) > 1 and min(np.bincount(y)) >= 2 else None
-    tr_idx, va_idx = train_test_split(np.arange(len(y)), test_size=0.2, random_state=42, stratify=strat)
+# ---------------- TRAIN ----------------
+best_f1 = 0
+best_thresh = 0.5
 
-    ensemble = {"models": [], "threshold": 0.5, "model_names": args.models}
-    val_probs = []
+for epoch in range(EPOCHS):
+    model.train()
+    for batch in train_loader:
+        batch = {k: v.to(DEVICE) for k, v in batch.items()}
+        out = model(**batch)
+        loss = out.loss
+        loss.backward()
+        optimizer.step()
+        optimizer.zero_grad()
 
-    for model_name in args.models:
-        print(f"\nEncoding with {model_name}")
-        emb = BertEmbedder(model_name, cache_dir=args.cache_dir)
-        X = emb.encode(texts, batch_size=args.batch_size)
-        clf = train_lr_on_embeddings(X[tr_idx], y[tr_idx])
-        p = clf.predict_proba(X[va_idx])[:, 1]
-        val_probs.append(p)
-        pred = (p >= 0.5).astype(int)
-        print(classification_report(y[va_idx], pred, digits=4))
-        ensemble["models"].append({"model_name": model_name, "clf": clf})
+    # -------- VALIDATION --------
+    model.eval()
+    probs, true = [], []
 
-    avg = np.mean(np.vstack(val_probs), axis=0)
-    best_t, best_f1 = 0.5, -1
-    for t in np.linspace(0.25, 0.75, 51):
-        f1 = f1_score(y[va_idx], (avg >= t).astype(int), zero_division=0)
+    with torch.no_grad():
+        for batch in val_loader:
+            batch = {k: v.to(DEVICE) for k, v in batch.items()}
+            logits = model(**batch).logits
+            p = torch.softmax(logits, dim=1)[:, 1].cpu().numpy()
+            probs.extend(p)
+            true.extend(batch["labels"].cpu().numpy())
+
+    probs = np.array(probs)
+    true = np.array(true)
+
+    # 🔥 threshold sweep
+    for t in np.linspace(0.2, 0.5, 20):
+        preds = (probs > t).astype(int)
+        f1 = f1_score(true, preds)
         if f1 > best_f1:
-            best_t, best_f1 = float(t), float(f1)
-    ensemble["threshold"] = best_t
-    print(f"Best ensemble threshold={best_t:.2f}, val_f1={best_f1:.4f}")
-    save_ensemble(args.out, ensemble)
-    print(f"Saved {args.out}")
+            best_f1 = f1
+            best_thresh = t
 
-if __name__ == "__main__":
-    main()
+    acc = accuracy_score(true, (probs > best_thresh).astype(int))
+
+    print(f"Epoch {epoch+1} | Acc={acc:.4f} F1={best_f1:.4f} Thresh={best_thresh:.3f}")
+
+# ---------------- SAVE ----------------
+os.makedirs("artifacts/bert_model", exist_ok=True)
+model.save_pretrained("artifacts/bert_model")
+tokenizer.save_pretrained("artifacts/bert_model")
+
+with open("artifacts/threshold.json", "w") as f:
+    json.dump({
+        "threshold": float(best_thresh),
+        "max_length": MAX_LEN,
+        "truncation_side": "left"
+    }, f, indent=2)
+
+print("Training complete.")
